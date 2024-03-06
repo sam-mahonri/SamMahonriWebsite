@@ -1,0 +1,82 @@
+{% extends 'layouts/public.html' %}
+
+{% block content %}
+
+<style>
+    .back{
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .back1{
+        background-image: url('static/source/back1.svg');
+    }
+    .back2{
+        background-image: url('static/source/back2.svg');
+    }
+</style>
+
+<main class="back back1">
+    <section>
+        <div class="flex hv100 wp100 justifyCenter alignStart paddingLarge borderBox columnFlex minusTopNav backFixed">
+            
+            <div class="flex rowFlex wp100 gapLarge alignCenter">
+                <span class="dotMark aos-init animate-me" data-aos="fade-up" data-aos-delay="1250">
+                    <span class="markRailBottom"></span>
+                </span>
+                <span style="width: 256px;" class="onlyDesktop aos-init" data-aos="fade-left" data-aos-delay="1250">{% include 'components/sam_logo.html' %}</span>
+                <div class="flex columnFlex justifyCenter alignStart">
+                    
+                    <h2 class="textLeft aos-init" data-aos="fade-up" data-aos-delay="1000">{{ _('Olá!') }}</h2>
+                    <div class="flex overflowHidden">
+                        <h1 class="textLeft aos-init" data-aos="fade-up" data-aos-delay="1200">{{ _('Eu sou') }}</h1>
+                    </div>
+                    <div class="flex overflowHidden">
+                        <h1 class="babilonicColor textLeft aos-init" data-aos="fade-up" data-aos-delay="1400">Sam Mahonri!</h1>
+                    </div>
+                    <div class="flex overflowHidden columnFlex">
+                        <p class="textLeft aos-init" data-aos="fade-up" data-aos-delay="1600">{{ _('Sobre mim - Resumo') }}</p>
+                    </div>
+                    <span class="spc32"></span>
+                    <div class="flex flexGrid gapMedium">
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="1800"><button class="primaryButton" onclick="scrollToSection('recent-projects')"><i class="fa-solid fa-arrow-down"></i>{{ _('Novidades')}}</button></span>
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="2000"><a><button class="plainButton"><i class="fa-solid fa-palette"></i>{{ _('Serviços') }}</button></a></span>
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="2200"><a><button class="primaryButton"><i class="fa-solid fa-paw"></i>{{ _('Ver currículo')}}</button></a></span>
+                        
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<main class="back back2 aos-init animate-me" id="recent-projects">
+    <section>
+        <div class="flex hv100 wp100 justifyCenter alignStart paddingLarge borderBox columnFlex minusTopNav backFixed">
+            
+            <div class="flex rowFlex wp100 gapLarge alignCenter">
+                <span class="dotMark aos-init animate-me" data-aos="fade" data-aos-delay="0">
+                    <span class="markRailTop"></span>
+                    <span class="markRailTop"></span>
+                </span>
+                <div class="flex columnFlex justifyCenter alignStart">
+                    
+                    <h2 class="textLeft aos-init" data-aos="fade-up" data-aos-delay="1000">{{ _('Portfólio') }}</h2>
+                    <div class="flex overflowHidden">
+                        <h1 class="textLeft aos-init" data-aos="fade-up" data-aos-delay="1500">{{ _('Projetos recentes') }}</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block navbar %}
+    {% with current_page = 'home'%}
+        {% include 'components/navbar.html' %}
+    {% endwith %}
+{% endblock %}

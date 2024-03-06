@@ -1,0 +1,37 @@
+
+.applyNoBack{
+    height: 100px;
+    max-height: 100px;
+    backdrop-filter: blur(0px) !important;
+    background-color: transparent !important;
+    box-shadow: 0px 0px 0px transparent !important;
+}
+
+nav{
+    height: 82px;
+    max-height: 82px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 8px var(--neutral-dark);
+    background-color: var(--sec-dark);
+    
+}nav > section{
+    padding: var(--padding-large);
+}
+
+
+
+@media only screen and (max-width: 700px){
+    .applyNoBack > section{
+        padding-top: calc(var(--padding-large) / 1.5) !important;
+    }
+    nav > section{
+        padding-top: calc(var(--padding-large) / 2.5);
+    }
+    .noCollapsed{
+        max-height: 100% !important;
+        height: 100% !important;
+        background-color: var(--sec-dark) !important;
+        backdrop-filter: blur(8px) !important;
+        overflow: auto;
+    }
+}

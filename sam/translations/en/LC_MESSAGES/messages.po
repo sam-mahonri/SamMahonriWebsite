@@ -1,0 +1,76 @@
+# English translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-03-05 18:47-0300\n"
+"PO-Revision-Date: 2024-03-05 18:59-0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: index.html:8 sam/templates/public/index.html:8
+msgid "Olá!"
+msgstr "Hello!"
+
+#: index.html:9 sam/templates/public/index.html:9
+msgid "Eu sou"
+msgstr "I'm"
+
+#: sam/templates/components/footer.html:5
+msgid "Social"
+msgstr "Social"
+
+#: sam/templates/components/footer.html:9
+msgid "Transparência"
+msgstr "Transparency"
+
+#: sam/templates/components/footer.html:10
+msgid "Código fonte do site"
+msgstr "Website source code"
+
+#: sam/templates/components/footer.html:11
+msgid "Política de Cookies"
+msgstr "Cookie Policy"
+
+#: sam/templates/components/footer.html:14
+msgid "Apoie"
+msgstr "Support"
+
+#: sam/templates/components/footer.html:21
+msgid "© 2024 Todos os direitos reservados - Sam Mahonri"
+msgstr "© 2024 All Rights Reserved - Sam Mahonri"
+
+#: sam/templates/components/footer.html:22
+msgid "Feito com <i class=\"fa-solid fa-heart\"></i> por Sam Mahonri"
+msgstr "Made with <i class=\"fa-solid fa-heart\"></i> by Sam Mahonri"
+
+#: sam/templates/components/navbar.html:18
+msgid "INÍCIO"
+msgstr "HOME"
+
+#: sam/templates/components/navbar.html:19
+msgid "SOBRE MIM"
+msgstr "ABOUT ME"
+
+#: sam/templates/components/navbar.html:20
+msgid "ARTÍSTICO"
+msgstr "ARTISTIC"
+
+#: sam/templates/components/navbar.html:21
+msgid "TRABALHOS"
+msgstr "WORKS"
+
+#: sam/templates/components/navbar.html:22
+msgid "CONTATO"
+msgstr "CONTACT"
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    {% block opengraph %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:url" content="https://sammahonri.com">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Sam Mahonri - Portfólio">
+        <meta property="og:image" content="static\source\default_og.png">
+    {% endblock %}
+    <title>
+        {% block title %}
+            Sam Mahonri - Portfólio
+        {% endblock %}
+    </title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+
+    
+    {% block navbar %}
+        {% with current_page = 'home'%}
+            {% include 'components/navbar.html' %}
+        {% endwith %}
+    {% endblock %}
+
+    {% block content %}
+    <main>
+        <section>
+            
+        </section>
+    </main>
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'components/footer.html' %}
+    {% endblock %}
+
+    {% include 'components/all.html' %}
+
+    
+
+</body>
+</html>

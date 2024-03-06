@@ -1,0 +1,38 @@
+<nav class="navbar borderBox noBack justifyCenter">
+    <section class="flex rowFlexColumn borderBox gapLarge">
+        <span class="flex rowFlex alignCenter justifyCenter">
+            <a href="/" class="flex rowFlex alignCenter justifyCenter">
+                <span style="width: 52px;">{% include 'components/sam_logo.html' %}</span>
+                <h2>Sam Mahonri</h2>
+            </a>
+            <span class="flexExpand"></span>
+            
+            <button onclick="toggleMenu(this)" class="selectorButton onlyMobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+        </span>
+        
+        <span class="flexExpand"></span>
+        <div class="flex rowFlexColumn justifyCenter alignCenter gapLarge">
+            <a href="/" class="aT {{ 'activeAT' if current_page == 'home' }}">{{ _('INÍCIO') }}</a>
+            <a href="#" class="aT {{ 'activeAT' if current_page == 'about' }}">{{ _('SOBRE MIM') }}</a>
+            <a href="#" class="aT {{ 'activeAT' if current_page == 'works' }}">{{ _('PROJETOS')}}</a>
+            <a href="#" class="aT {{ 'activeAT' if current_page == 'arts' }}">{{ _('ARTES') }}</a>
+            <button id="themeBtn" class="selectorButton themeSelector">
+                <i id="themeIcon" class="fas fa-adjust"></i>
+            </button>
+        </div>
+        
+        <span class="flexExpand onlyMobile"></span>
+    </section>
+</nav>
+
+<script>
+function toggleMenu(bt) {
+  var navbar = document.querySelector('.navbar');
+  navbar.classList.toggle('noCollapsed');
+  if(navbar.classList.contains('noCollapsed')){ bt.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>'}
+  else{bt.innerHTML = '<i class="fa-solid fa-bars"></i>'}
+};
+</script>

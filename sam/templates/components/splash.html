@@ -1,0 +1,20 @@
+<div class="splashScreen" id="splashScreenId">
+    <span style="width: 128px;">{% include 'components/sam_logo.html' %}</span>
+</div>
+<style>
+    .splashScreen {
+        pointer-events: none;
+        transition: opacity var(--transition-duration) ease-in-out, background-color var(--transition-duration) ease-in-out;
+        z-index: 2000;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: var(--current-back-color);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>

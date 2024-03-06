@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+:root {
+    /* Cores Gerais */
+    --dark-color: #1c1b24;
+    --light-color: #f5f0fcec;
+    --current-back-color: var(--dark-color);
+    --current-text-color: var(--light-color);
+    --neutral-dark: rgba(22, 22, 32, 0.267);
+    /* Cores do Tema */
+    --theme-color: #9265e6;
+    --theme-color-trans: #9265e65e;
+    --theme-babilonic: #de4c7d;
+    --error-color: #e62169;
+    --success-color: rgb(58, 168, 117);
+
+    /* Tamanhos de Texto */
+    --p-text-size: 12pt;
+    --mob-p-text-size: 11pt;
+    --h1-text-size: 37pt;
+    --mob-h1-text-size: 27pt;
+    --h2-text-size: 15pt;
+    --mob-h2-text-size: 12pt;
+    --primary-bt-text-size: 9pt;
+
+    /* Fontes */
+    --font-family-logo: 'Raleway', sans-serif;
+    --font-family-primary: 'Unbounded', sans-serif;
+    --font-family-secondary: 'Raleway', sans-serif;
+
+    /* Espaçamentos */
+    --padding-small: 8px;
+    --padding-medium: 16px;
+    --padding-large: 32px;
+    --padding-button: 18px 28px 18px 28px;
+    --margin-small: 8px;
+    --margin-medium: 16px;
+    --margin-large: 24px;
+
+    /* Gaps */
+    --gap-small: 8px;
+    --gap-medium: 16px;
+    --gap-large: 24px;
+    --gap-x-large: 48px;
+
+    /* Outras Propriedades */
+    --border-radius: 32px;
+    --border-hover-radius: 32px;
+    --box-shadow: 0 0px 8px rgba(0, 0, 0, 0.375);
+
+    --sec-dark: #2d2c3abe;
+    --neutral-color: rgba(103, 100, 121, 0.245);
+    --transition-duration: 0.3s;
+}
+
+/* Modo Claro (Exceção) */
+:root.light-theme {
+    --current-back-color: #ece6f5;
+    --current-text-color: rgb(76, 75, 97);
+    --sec-dark: #ece6f5c0;
+}

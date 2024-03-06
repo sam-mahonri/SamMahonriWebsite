@@ -1,0 +1,79 @@
+# Portuguese translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-03-05 18:47-0300\n"
+"PO-Revision-Date: 2024-03-05 18:59-0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: pt\n"
+"Language-Team: pt <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: index.html:8 sam/templates/public/index.html:8
+msgid "Olá!"
+msgstr "Olá!"
+
+#: index.html:9 sam/templates/public/index.html:9
+msgid "Eu sou"
+msgstr "Me chamo "
+
+msgid "Sobre mim - Resumo"
+msgstr "Sou brasileiro, nordestino e pernambucano.<br>Tenho paixão pela área de desenvolvimento de jogos e web, além de atuar como designer e artista. A arte é uma grande inspiração em minha vida, e busco expressá-la de diferentes formas em meus projetos."
+
+#: sam/templates/components/footer.html:5
+msgid "Social"
+msgstr "Social"
+
+#: sam/templates/components/footer.html:9
+msgid "Transparência"
+msgstr "Transparência"
+
+#: sam/templates/components/footer.html:10
+msgid "Código fonte do site"
+msgstr "Código fonte do site"
+
+#: sam/templates/components/footer.html:11
+msgid "Política de Cookies"
+msgstr "Política de Cookies"
+
+#: sam/templates/components/footer.html:14
+msgid "Apoie"
+msgstr "Apoie"
+
+#: sam/templates/components/footer.html:21
+msgid "© 2024 Todos os direitos reservados - Sam Mahonri"
+msgstr "© 2024 Todos os direitos reservados - Sam Mahonri"
+
+#: sam/templates/components/footer.html:22
+msgid "Feito com <i class=\"fa-solid fa-heart\"></i> por Sam Mahonri"
+msgstr "Feito com <i class=\"fa-solid fa-heart\"></i> por Sam Mahonri"
+
+#: sam/templates/components/navbar.html:18
+msgid "INÍCIO"
+msgstr "INÍCIO"
+
+#: sam/templates/components/navbar.html:19
+msgid "SOBRE MIM"
+msgstr "SOBRE MIM"
+
+#: sam/templates/components/navbar.html:20
+msgid "ARTÍSTICO"
+msgstr "ARTÍSTICO"
+
+#: sam/templates/components/navbar.html:21
+msgid "TRABALHOS"
+msgstr "TRABALHOS"
+
+#: sam/templates/components/navbar.html:22
+msgid "CONTATO"
+msgstr "CONTATO"
+
