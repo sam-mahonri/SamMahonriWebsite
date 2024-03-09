@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-05 18:47-0300\n"
-"PO-Revision-Date: 2024-03-05 18:59-0300\n"
+"POT-Creation-Date: 2024-03-07 22:06-0300\n"
+"PO-Revision-Date: 2024-03-08 10:05-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,59 +18,341 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: index.html:8 sam/templates/public/index.html:8
+#: index.html:8 sam/templates/public/index.html:29
 msgid "Olá!"
-msgstr "Hello!"
+msgstr ""
 
-#: index.html:9 sam/templates/public/index.html:9
+#: index.html:9 sam/templates/public/index.html:31
 msgid "Eu sou"
-msgstr "I'm"
+msgstr ""
+
+#: sam/src/admin/forms.py:19
+msgid "Nome de usuário"
+msgstr ""
+
+#: sam/src/admin/forms.py:20
+msgid "Senha"
+msgstr ""
+
+#: sam/src/admin/forms.py:23
+msgid "Título do aviso"
+msgstr ""
+
+#: sam/src/admin/forms.py:24
+msgid "Descrição do aviso"
+msgstr ""
+
+#: sam/src/admin/forms.py:25
+msgid "Mostrar aviso"
+msgstr ""
+
+#: sam/src/admin/forms.py:26 sam/src/admin/forms.py:45
+msgid "Link da imagem do banner"
+msgstr ""
+
+#: sam/src/admin/forms.py:27
+msgid "Link de redirecionamento"
+msgstr ""
+
+#: sam/src/admin/forms.py:28
+msgid "Link do formulário de contato para comissões"
+msgstr ""
+
+#: sam/src/admin/forms.py:29
+msgid "Número total de slots"
+msgstr ""
+
+#: sam/src/admin/forms.py:30
+msgid "Slots usados"
+msgstr ""
+
+#: sam/src/admin/forms.py:31
+msgid "Comissões abertas"
+msgstr ""
+
+#: sam/src/admin/forms.py:39 sam/src/admin/forms.py:44
+msgid "Título"
+msgstr ""
+
+#: sam/src/admin/forms.py:40
+msgid "Valor máximo do tipo"
+msgstr ""
+
+#: sam/src/admin/forms.py:41
+msgid "Link da imagem de exemplo do tipo"
+msgstr ""
+
+#: sam/src/admin/forms.py:46
+msgid "Tags (separadas por vírgula)"
+msgstr ""
+
+#: sam/src/admin/forms.py:47
+msgid "Conteúdo"
+msgstr ""
+
+#: sam/src/admin/forms.py:50
+msgid "Nome da imagem"
+msgstr ""
+
+#: sam/src/admin/forms.py:51
+msgid "Listar na galeria de artes"
+msgstr ""
+
+#: sam/src/admin/forms.py:52
+msgid "Apenas imagens do tipo .jpg, .png, .gif e .jpeg!"
+msgstr ""
+
+#: sam/src/enums/errors.py:5
+msgid "Credenciais inválidas"
+msgstr ""
+
+#: sam/src/enums/errors.py:6
+msgid "Problemas no formulário"
+msgstr ""
+
+#: sam/src/enums/errors.py:7
+msgid "Acesso proibido"
+msgstr ""
+
+#: sam/src/enums/errors.py:8
+msgid "Recurso não encontrado"
+msgstr ""
+
+#: sam/src/enums/errors.py:9
+msgid "Erro interno do servidor"
+msgstr ""
+
+#: sam/src/enums/errors.py:10
+msgid "Ocorreu algum erro"
+msgstr ""
+
+#: sam/src/enums/errors.py:11
+msgid "Este idioma não existe"
+msgstr ""
+
+#: sam/src/enums/errors.py:12
+msgid "O token de acesso da sessão de administrador expirou, faça login novamente"
+msgstr ""
+
+#: sam/src/enums/errors.py:13
+msgid "Você não tem permissão para acessar esta página"
+msgstr ""
+
+#: sam/src/enums/errors.py:14
+msgid ""
+"Por segurança, seu acesso expirou por tempo prolongado de inatividade, "
+"faça login novamente para entrar no painel de controle"
+msgstr ""
+
+#: sam/src/enums/success.py:5
+msgid "Postagem criada com êxito!"
+msgstr ""
+
+#: sam/src/enums/warnings.py:5
+msgid "Não foi possível carregar corretamente o arquivo da imagem"
+msgstr ""
+
+#: sam/templates/admin/gallery.html:20
+msgid "Galeria de imagens"
+msgstr ""
+
+#: sam/templates/admin/index.html:21
+msgid "Olá, Sam!"
+msgstr ""
+
+#: sam/templates/admin/index.html:24
+msgid "Estatísticas da semana"
+msgstr ""
+
+#: sam/templates/admin/index.html:27
+msgid "Acessos"
+msgstr ""
+
+#: sam/templates/admin/index.html:31 sam/templates/components/navbar.html:31
+msgid "Artes"
+msgstr ""
+
+#: sam/templates/admin/index.html:35 sam/templates/admin/index.html:49
+msgid "Postagens"
+msgstr ""
+
+#: sam/templates/admin/index.html:43
+msgid "Configurações"
+msgstr ""
+
+#: sam/templates/admin/index.html:45 sam/templates/components/navbar.html:34
+msgid "Galeria"
+msgstr ""
+
+#: sam/templates/admin/index.html:47 sam/templates/admin/index.html:78
+#: sam/templates/components/navbar.html:35
+msgid "Comissões"
+msgstr ""
+
+#: sam/templates/admin/index.html:65
+msgid "Configurações gerais"
+msgstr ""
+
+#: sam/templates/admin/index.html:70
+msgid "Aviso global"
+msgstr ""
+
+#: sam/templates/admin/index.html:81
+msgid "Salvar"
+msgstr ""
+
+#: sam/templates/admin/login.html:19
+msgid "Área restrita"
+msgstr ""
+
+#: sam/templates/admin/login.html:23
+msgid "Nome de Usuário:"
+msgstr ""
+
+#: sam/templates/admin/login.html:24
+msgid "Digite seu nome de usuário"
+msgstr ""
+
+#: sam/templates/admin/login.html:28
+msgid "Senha:"
+msgstr ""
+
+#: sam/templates/admin/login.html:29
+msgid "Digite sua senha"
+msgstr ""
+
+#: sam/templates/admin/login.html:33
+msgid "Entrar"
+msgstr ""
 
 #: sam/templates/components/footer.html:5
 msgid "Social"
-msgstr "Social"
+msgstr ""
 
-#: sam/templates/components/footer.html:9
+#: sam/templates/components/footer.html:12
 msgid "Transparência"
-msgstr "Transparency"
+msgstr ""
 
-#: sam/templates/components/footer.html:10
+#: sam/templates/components/footer.html:13
 msgid "Código fonte do site"
-msgstr "Website source code"
-
-#: sam/templates/components/footer.html:11
-msgid "Política de Cookies"
-msgstr "Cookie Policy"
+msgstr ""
 
 #: sam/templates/components/footer.html:14
+msgid "Idiomas"
+msgstr ""
+
+#: sam/templates/components/footer.html:18
 msgid "Apoie"
-msgstr "Support"
+msgstr ""
+
+#: sam/templates/components/footer.html:20
+msgid "Administrativo"
+msgstr ""
 
 #: sam/templates/components/footer.html:21
+msgid "Meu espaço"
+msgstr ""
+
+#: sam/templates/components/footer.html:26
 msgid "© 2024 Todos os direitos reservados - Sam Mahonri"
-msgstr "© 2024 All Rights Reserved - Sam Mahonri"
+msgstr ""
 
-#: sam/templates/components/footer.html:22
+#: sam/templates/components/footer.html:27
 msgid "Feito com <i class=\"fa-solid fa-heart\"></i> por Sam Mahonri"
-msgstr "Made with <i class=\"fa-solid fa-heart\"></i> by Sam Mahonri"
+msgstr ""
 
-#: sam/templates/components/navbar.html:18
-msgid "INÍCIO"
-msgstr "HOME"
+#: sam/templates/components/lang.html:2
+msgid "PT-BR"
+msgstr ""
 
-#: sam/templates/components/navbar.html:19
-msgid "SOBRE MIM"
-msgstr "ABOUT ME"
+#: sam/templates/components/lang.html:3
+msgid "EN"
+msgstr ""
 
-#: sam/templates/components/navbar.html:20
-msgid "ARTÍSTICO"
-msgstr "ARTISTIC"
+#: sam/templates/components/lang.html:4
+msgid "ES"
+msgstr ""
 
-#: sam/templates/components/navbar.html:21
-msgid "TRABALHOS"
-msgstr "WORKS"
+#: sam/templates/components/lang.html:5
+msgid "FR"
+msgstr ""
 
-#: sam/templates/components/navbar.html:22
-msgid "CONTATO"
-msgstr "CONTACT"
+#: sam/templates/components/navbar.html:28
+msgid "Início"
+msgstr ""
+
+#: sam/templates/components/navbar.html:29 sam/templates/public/index.html:43
+msgid "Sobre mim"
+msgstr ""
+
+#: sam/templates/components/navbar.html:30
+msgid "Projetos"
+msgstr ""
+
+#: sam/templates/components/navbar.html:33
+msgid "Painel"
+msgstr ""
+
+#: sam/templates/components/navbar.html:36 sam/templates/public/index.html:41
+msgid "Novidades"
+msgstr ""
+
+#: sam/templates/components/navbar.html:38
+msgid "Alternar esquema de cores"
+msgstr ""
+
+#: sam/templates/components/navbar.html:43
+msgid "Ir para página de administração"
+msgstr ""
+
+#: sam/templates/components/navbar.html:47
+msgid "Encerrar sessão"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:14
+msgid "Página não encontrada"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:17
+msgid "Vai com calma!"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:18
+msgid ""
+"Limitamos o seu acesso por um curto periodo de tempo por você estar "
+"entusiasmado demais. Limitamos para evitar ataques de negação de serviço "
+"DoS/DDoS"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:21
+msgid "Não pode!"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:24
+msgid "Ocorreu um erro interno"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:29
+msgid "Faça login"
+msgstr ""
+
+#: sam/templates/layouts/errorpage.html:31
+msgid "Voltar à página inicial"
+msgstr ""
+
+#: sam/templates/public/index.html:37
+msgid "Sobre mim - Resumo"
+msgstr ""
+
+#: sam/templates/public/index.html:42
+msgid "Arte & Design"
+msgstr ""
+
+#: sam/templates/public/index.html:63
+msgid "Portfólio"
+msgstr ""
+
+#: sam/templates/public/index.html:65
+msgid "Projetos recentes"
+msgstr ""
 

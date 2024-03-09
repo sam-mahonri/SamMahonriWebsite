@@ -13,7 +13,8 @@
     --theme-color-trans: #9265e65e;
     --theme-babilonic: #de4c7d;
     --error-color: #e62169;
-    --success-color: rgb(58, 168, 117);
+    --success-color: rgb(59, 199, 134);
+    --warning-color: rgb(231, 177, 61);
 
     /* Tamanhos de Texto */
     --p-text-size: 12pt;
@@ -46,12 +47,15 @@
 
     /* Outras Propriedades */
     --border-radius: 32px;
-    --border-hover-radius: 32px;
+    --border-2-radius: 16px;
     --box-shadow: 0 0px 8px rgba(0, 0, 0, 0.375);
 
     --sec-dark: #2d2c3abe;
-    --neutral-color: rgba(103, 100, 121, 0.245);
+    --neutral-color: rgba(119, 115, 145, 0.26);
     --transition-duration: 0.3s;
+
+    --line-height-h1: 48px;
+    --mob-line-height-h1: 32px;
 }
 
 /* Modo Claro (Exceção) */

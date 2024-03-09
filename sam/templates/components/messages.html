@@ -1,0 +1,12 @@
+<div class="flashMessages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for categoria, mensagem in messages %}
+                <script>
+                    showFlashMessage("{{ mensagem }}", "{{ 'successFlash' if categoria == 'success' else 'errorFlash' if categoria == 'error' else 'warningFlash' }}");
+                </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+

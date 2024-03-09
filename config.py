@@ -36,7 +36,8 @@ class Config:
     JWT_CSRF_CHECK_FORM = True
     JWT_COOKIE_CSRF_PROTECT = False
     
+    BABEL_TRANSLATION_DIRECTORIES = "translations"
     BABEL_DEFAULT_LOCALE = 'pt_BR'
-    LANGUAGES = ['en', 'es', 'pt_BR', 'pt']
+    LANGUAGES = ['en', 'es', 'pt_BR']
     BABEL_DOMAINS = ['buttons', 'errors']
 

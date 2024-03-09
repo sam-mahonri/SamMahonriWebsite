@@ -1,0 +1,25 @@
+{% macro render_field(field) %}
+    
+    {% if field.type == 'BooleanField' %}
+        <div>
+            <label class="checkbox-label">
+                <p>{{ field.label.text }}</p>
+                {{ field() }}
+                <span class="checkmark"></span>
+            </label>
+        </div>
+            
+    {% else %}
+        <div class="flex columnFlex wp100">
+            <div class="innerLabel">
+                {{ field(placeholder='.', class="errorInput" if field.errors else "") }}
+                <span>{{ field.label.text }}</span>
+                
+            </div>
+            {% if field.errors %}
+                <span class="tag backRed">{{ field.errors[0] }}</span>
+            {% endif %}
+        </div>
+        
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<style>
+    .back1{
+        background-image: url('/static/source/backerror.svg');
+    }
+</style>
+<main class="back back1" id="init-main">
+    <section>
+        <div class="flex hv100 wp100 justifyCenter alignStart paddingLarge borderBox columnFlex minusTopNav backFixed">
+            <div class="flex columnFlex wp100 gapLarge alignCenter">
+                {% if status_code == 404 %}
+                    <i class="fa-solid fa-signs-post errorColor" style="font-size: 64px; margin-bottom: 16px"></i>
+                    <h1>{{ _("Página não encontrada") }}</h1>
+                {% elif status_code == 429 %}
+                    <i class="fa-solid fa-gauge-high errorColor" style="font-size: 64px; margin-bottom: 16px"></i>
+                    <h1>{{ _("Vai com calma!") }}</h1>
+                    <p>{{ _("Limitamos o seu acesso por um curto periodo de tempo por você estar entusiasmado demais. Limitamos para evitar ataques de negação de serviço DoS/DDoS") }}</p>
+                {% elif status_code == 401 %}
+                    <i class="fa-solid fa-shield-halved errorColor" style="font-size: 64px; margin-bottom: 16px"></i>
+                    <h1>{{ _("Não pode!") }}</h1>
+                {% else %}
+                    <i class="fa-solid fa-bug errorColor" style="font-size: 64px; margin-bottom: 16px"></i>
+                    <h1>{{ _("Ocorreu um erro interno") }}</h1>
+                {% endif %}
+                
+                <h1 class="errorColor">{{ status_code }}</h1>
+                {% if status_code == 401 %}
+                    <button class="primaryButton" style="margin-top: 22px;" onclick='window.location.href="/auth/login"'><i class="fa-solid fa-clipboard-user"></i> {{ _("Faça login") }}</button>
+                {% endif %}
+                <button class="primaryButton" style="margin-top: 22px;" onclick='window.location.href="/"'><i class="fa-solid fa-house"></i>{{ _("Voltar à página inicial") }}</button>
+                <p style="opacity: 0.3; text-align: center" >{{ error }}</p>
+            </div>            
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block header %}
+    {% include 'components/navbar/navbar.html' %}
+{% endblock %}

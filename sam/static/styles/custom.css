@@ -18,7 +18,100 @@ nav{
     padding: var(--padding-large);
 }
 
+.checkbox-label {
+    position: relative;
+    display: block;
+    padding-left: 36px;
+    margin-bottom: 19px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+}
 
+.checkbox-label > p{
+    translate: 0px 4px;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: var(--neutral-color);
+    border: solid 1px var(--neutral-color);
+    border-radius: 8px;
+    display: inline;
+}
+
+.checkbox-label:hover input ~ .checkmark {
+    background-color: var(--current-text-color);
+}
+
+.checkbox-label input:checked ~ .checkmark {
+    background-color: var(--theme-color);
+    box-shadow: 0px 4px 8px var(--theme-color-trans);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-label .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid  var(--light-color);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.innerLabel{
+    margin-top: 16px;
+    margin-bottom: -16px;
+    width: 100%;
+}
+
+.innerLabel > span{
+    pointer-events: none;
+    max-width: 80%;
+    display: inline-block;
+    position: relative;
+    bottom: 36px;
+    left: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10pt;
+}
+.innerLabel > input:focus ~ span,
+.innerLabel > input:not(:placeholder-shown) ~ span{
+    bottom: 72px;
+}.innerLabel > input:not(:placeholder-shown), textarea:not(:placeholder-shown){
+    border-color: var(--theme-color);
+    background-color: var(--theme-color-trans);
+}
+
+
+::placeholder{
+    color: transparent;
+}
 
 @media only screen and (max-width: 700px){
     .applyNoBack > section{

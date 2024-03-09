@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ current_language }}">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block opengraph %}
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:url" content="https://sammahonri.com">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Sam Mahonri - Portfólio">
         <meta property="og:image" content="static\source\default_og.png">
     {% endblock %}
     <title>
@@ -18,13 +17,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
-
-    
+    {% include 'components/all.html' %}
     {% block navbar %}
         {% with current_page = 'home'%}
             {% include 'components/navbar.html' %}
         {% endwith %}
     {% endblock %}
+
+    
 
     {% block content %}
     <main>
@@ -38,9 +38,11 @@
         {% include 'components/footer.html' %}
     {% endblock %}
 
-    {% include 'components/all.html' %}
-
     
+
+    {% include 'components/messages.html' %}
+
+    <button class="selectorButton goUpBt topInvScroll" class-on-scroll="opacity0" offset-on-scroll="256" onclick="scrollToSection('init-main', 1000)"><i class="fa-solid fa-angles-up"></i></button>
 
 </body>
 </html>

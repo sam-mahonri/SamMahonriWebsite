@@ -6,6 +6,12 @@
     transition-duration: var(--transition-duration);
 }
 
+body {
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 h1{ 
     line-height: 48px;
     font-size: var(--h1-text-size);
@@ -13,21 +19,73 @@ h1{
     overflow: visible;
 }
 
+.tag{
+    font-family: var(--font-family-primary);
+    font-size: var(--primary-bt-text-size);
+    padding: 4px 8px 4px 8px;
+    border-radius: var(--border-2-radius);
+    width: fit-content;
+}
+
+.backRed{
+    color: var(--light-color) !important;
+    background-color: var(--error-color);
+}
+
 h2{ font-size: var(--h2-text-size); }
 
 h1, h2, h3, h4, h5, h6{
+    gap: var(--gap-small);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     margin: 0;
     font-family: var(--font-family-primary);
+}h1 i{
+    font-size: var(--mob-h1-text-size);
+    opacity: 0.5;
+    color: var(--current-text-color) !important;
 }
+
+p, span{
+    color: var(--current-text-color);
+    font-family: var(--font-family-secondary);
+} 
 
 .extraMargin{
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
-p, a{
+p, a, label, input, textarea{
+    margin: 0;
     font-size: var(--p-text-size);
     font-family: var(--font-family-secondary);
+    color: var(--current-text-color);
+}
+
+
+
+input, textarea{
+    outline-style: none;
+    box-sizing: border-box;
+    border-radius: var(--border-2-radius);
+    padding: var(--padding-medium);
+    background-color: var(--neutral-color);
+    border: solid 1px var(--neutral-color);
+}input:focus, textarea:focus{
+    border-color: var(--theme-color);
+    background-color: var(--theme-color-trans);
+}
+
+textarea{
+    resize: vertical;
+    min-height: 128px;
+}
+
+.errorInput{
+    border-color: var(--error-color) !important;
 }
 
 button{
@@ -38,20 +96,28 @@ button{
     gap: var(--gap-small);
     font-size: var(--primary-bt-text-size);
     font-family: var(--font-family-primary);
-    font-weight: 400;
+    font-weight: 600;
+    border: solid 1px var(--neutral-color);
 }button i{
     font-size: var(--p-text-size);
 }
+
 a{
     overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--gap-small);
-    color: var(--current-text-color);
+    
     text-decoration: none;
 }
 
+form{
+    gap: var(--gap-small);
+    width: 100%;
+}form input, form textarea{
+    width: 100%;
+}
 
 .a{
     opacity: 0.7;
@@ -92,7 +158,9 @@ a{
 }
 
 .opacity0{
-    opacity: 0;
+    transition: opacity var(--transition-duration) ease-in-out;
+    pointer-events: none;
+    opacity: 0 !important;
 }
 
 h1, h2, h3, h4, h5, h6, p{
@@ -151,6 +219,8 @@ nav{
     width: 100%;
     display: flex;
     overflow: hidden;
+} nav .aT{
+    text-transform: uppercase;
 }
 
 .disabled{
@@ -208,6 +278,16 @@ nav *{
     height: fit-content;
 }
 
+.hv40{
+    min-height: 40vh;
+    height: fit-content;
+}
+
+.hv25{
+    min-height: 25vh;
+    height: fit-content;
+}
+
 .wp100{
     width: 100%;
 }
@@ -225,14 +305,20 @@ nav *{
     transition: background-size var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out, translate var(--transition-duration) ease-in-out;
     background-image: linear-gradient(45deg, var(--theme-color), var(--theme-babilonic));
     background-size: 500%;
-    border: none;
     border-radius: var(--border-radius);
     padding: var(--padding-button);
     color: var(--light-color);
+    border: none !important;
 }.primaryButton:hover{
     background-size: 200%;
     box-shadow: 0 10px 32px var(--theme-color-trans);
     translate: 0 -4px;
+}
+
+.goUpBt{
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
 }
 
 .backFixed{
@@ -242,32 +328,95 @@ nav *{
     background-repeat: no-repeat;
 }
 
+.back{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.panel{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    background-color: var(--sec-dark);
+    padding: var(--padding-medium);
+    border-radius: var(--border-2-radius);
+    border: solid 1px var(--neutral-color);
+    gap: var(--gap-small);
+    min-width: 92px;
+}.panel:hover{
+    border-color: var(--theme-color);
+    box-shadow: 0 8px 32px var(--theme-color-trans);
+}
+
+hr{
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    border-top: solid 2px var(--theme-color);
+}
+
+.disableInputEvents{
+    pointer-events: none;
+}
+
+.flashMessages{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    padding: var(--padding-large);
+    width: fit-content;
+    max-width: 100%;
+    bottom: 0px;
+    left: 0px;
+    max-height: 100%;
+    overflow-y: auto;
+    gap: var(--gap-medium);
+}
+.flashMessage{
+    border-radius: var(--border-radius);
+    padding: var(--padding-medium);
+    font-family: var(--font-family-secondary);
+    color: var(--light-color);
+    width: fit-content;
+}
+.successFlash, .successFlash *{
+    color: var(--dark-color) !important;
+    background-color: var(--success-color);
+}
+.errorFlash, .errorFlash *{
+    color: var(--light-color) !important;
+    background-color: var(--error-color);
+}
+.warningFlash, .warningFlash *{
+    color: var(--dark-color) !important;
+    background-color: var(--warning-color);
+}
+
 .selectorButton{
     padding: 16px;
     border-radius: 50%;
     aspect-ratio: 1/1;
-    background-color: transparent;
-    border: none;
-    height: 48px;
-}.selectorButton:hover{
     background-color: var(--neutral-color);
+    height: 48px;
 }
-
 .plainButton{
     text-transform: uppercase;
     color: var(--current-text-color);
     border-radius: var(--border-radius);
     padding: var(--padding-button);
     background-color: var(--neutral-color);
-    background-color: var(--neutral-color);
-    border: none;
 }.plainButton i{
     color: var(--current-text-color);
-}.plainButton:hover{
+}.selectorButton:hover,
+.plainButton:hover{
     translate: 0 -4px;
     color: var(--current-back-color);
     background-color: var(--current-text-color);
-}.plainButton:hover i{
+}.selectorButton:hover i,
+.plainButton:hover i{
     color: var(--current-back-color);
 }
 
@@ -283,6 +432,8 @@ nav *{
 .alignCenter,
 .alignCenterStart{
     align-items: center;
+}.alignCenter > h1{
+    text-align: center;
 }
 
 .alignStart,
@@ -473,7 +624,10 @@ footer *{
         max-height: 0;
     }
 
-    h1{ font-size: var(--mob-h1-text-size); }
+    h1{ 
+        line-height: var(--mob-line-height-h1);
+        font-size: var(--mob-h1-text-size); 
+    }
 
     h2{ font-size: var(--mob-h2-text-size); }
 

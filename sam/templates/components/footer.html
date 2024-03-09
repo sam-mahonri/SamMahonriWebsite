@@ -10,16 +10,19 @@
         </div>
         <div class="flex columnFlex alignCenter gapMedium flexExpand paddingLarge">
             <h2>{{ _('Transparência') }}</h2>
-            <a href="https://github.com/Furlibre/FurlibreWeb" target="_blank" class="aT"><i class="fa-solid fa-code"></i>{{ _('Código fonte do site') }}</a>
+            <a href="https://github.com/sam-mahonri/SamMahonriWebsite" target="_blank" class="aT"><i class="fa-solid fa-code"></i>{{ _('Código fonte do site') }}</a>
+            <h2>{{ _('Idiomas') }}</h2>
+            {% include 'components/lang.html' %}
         </div>
         <div class="flex columnFlex alignCenter gapMedium flexExpand paddingLarge">
             <h2>{{ _('Apoie') }}</h2>
             <a href="https://furlibre.com" target="_blank" class="aT"><i class="fa-regular fa-circle-dot"></i>Furlibre Project</a>
-
+            <h2 class="disabled">{{ _('Administrativo') }}</h2>
+            <a href="/admin" class="aT disabled"><i class="fa-solid fa-lock"></i>{{ _('Meu espaço') }}</a>
         </div>
         
     </div>
-    
-    <p style="opacity: 0.5;" class="textCenter">{{ _('© 2024 Todos os direitos reservados - Sam Mahonri') }}
+    <span style="width: 64px;">{% include 'components/sam_logo.html' %}</span>
+    <p class="textCenter">{{ _('© 2024 Todos os direitos reservados - Sam Mahonri') }}
     <br>{{ _('Feito com <i class="fa-solid fa-heart"></i> por Sam Mahonri') }}</p>
 </footer>
