@@ -1,4 +1,5 @@
 async function submitForm(event, form) {
+    var loadingFlash = showFlashMessage(DEF.PROCCESSING, 'loadingFlash', 0);
     event.preventDefault();
     form.classList.add('disabled')
     form.classList.add('disableInputEvents')
@@ -20,15 +21,30 @@ async function submitForm(event, form) {
             resetErrorMessages(data.data.form_data, data.data.form_errors)
         } else {
             console.error('Erro ao enviar o formulário:', response.statusText);
-            showFlashMessage(response.statusText, 'errorFlash');
+            switch (response.status) {
+                case 404:
+                    showFlashMessage(ERR.NOT_FOUND, 'errorFlash');
+                    break;
+                case 403:
+                    showFlashMessage(ERR.ACCESS_DENIED, 'errorFlash');
+                    break;
+                case 401:
+                    showFlashMessage(ERR.UNAUTHORIZED, 'errorFlash');
+                    break;
+                default:
+                    showFlashMessage(ERR.REQUEST_ERROR, 'errorFlash');
+            }
         }
-        setTimeout(() => {
-            form.classList.remove('disabled')
-            form.classList.remove('disableInputEvents')
-        }, 500);
+        
         
     } catch (error) {
         console.error('Erro de rede:', error);
+        showFlashMessage(ERR.REQUEST_ERROR, 'errorFlash');
     }
+    setTimeout(() => {
+        form.classList.remove('disabled')
+        form.classList.remove('disableInputEvents')
+        smoothErrorElement(loadingFlash, 250);
+    }, 500);
+    
 }
-

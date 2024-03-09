@@ -4,7 +4,7 @@
 :root {
     /* Cores Gerais */
     --dark-color: #1c1b24;
-    --light-color: #f5f0fcec;
+    --light-color: #f5f0fc;
     --current-back-color: var(--dark-color);
     --current-text-color: var(--light-color);
     --neutral-dark: rgba(22, 22, 32, 0.267);
@@ -31,7 +31,7 @@
     --font-family-secondary: 'Raleway', sans-serif;
 
     /* Espaçamentos */
-    --padding-small: 8px;
+    --padding-small: 12px;
     --padding-medium: 16px;
     --padding-large: 32px;
     --padding-button: 18px 28px 18px 28px;
@@ -48,6 +48,7 @@
     /* Outras Propriedades */
     --border-radius: 32px;
     --border-2-radius: 16px;
+    --border-3-radius: 8px;
     --box-shadow: 0 0px 8px rgba(0, 0, 0, 0.375);
 
     --sec-dark: #2d2c3abe;

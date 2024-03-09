@@ -4,7 +4,7 @@ from ..enums import errors as Err
 from ..enums import success as Ok
 from dotenv import load_dotenv
 import os
-from .forms import GeneralSettingsForm
+from .forms import GeneralSettingsForm, GalleryForm
 import requests
 from ..database import User, Statistics, GeneralSettings, bcrypt
 from flask_jwt_extended import (
@@ -48,5 +48,5 @@ def admin():
 @admin_bp.route("/gallery", methods=['POST', 'GET'])
 @jwt_required()
 def gallery(): 
-    form = GeneralSettingsForm()
+    form = GalleryForm()
     return render_template('admin/gallery.html', form = form)

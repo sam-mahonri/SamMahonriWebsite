@@ -51,36 +51,33 @@
 </main>
 <main class="back back2" id="general-settings">
     <section>
-        <div class="flex hv100 wp100 justifyCenter alignCenter paddingLarge borderBox rowFlexColumn minusTopNav backFixed">
-            <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium">
-                <span class="navComp"></span>
-                <h2 class="textLeft aos-init" data-aos="fade-left">
-                    <i class="fa-solid fa-sliders"></i>{{ _('Configurações gerais') }}</h2>
+        <div class="flex hv100 wp100 justifyCenter paddingLarge borderBox columnFlex gapMedium">
+            <span class="navComp"></span>
+            <h2 class="textLeft aos-init" data-aos="fade-left" style="margin-top: 8px;">
+                <i class="fa-solid fa-sliders"></i>{{ _('Configurações gerais') }}</h2>
+            <form method="POST" action="/api/general_settings/w/" id="general-settings-form"
+                class="flex columnFlex form alignStart panel wp100"
+                onsubmit="submitForm(event, this)">
+                {{ form.csrf_token }}
+                {% if form.errors %} <script>scrollToSection('general-settings')</script> {% endif %}
+                <h2>{{_('Aviso global')}}</h2>
+                {% from "macros/form_input.html" import render_field %}
+                {{ render_field(form.title) }}
+                {{ render_field(form.description) }}
+                {{ render_field(form.image_link) }}
+                {{ render_field(form.redirect_link) }}
+                {{ render_field(form.warning_show) }}
                 <hr>
-                <form method="POST" action="/api/general_settings/w/" id="warning-form"
-                    class="flex columnFlex form alignStart extraMargin"
-                    onsubmit="submitForm(event, this)">
-                    {{ form.csrf_token }}
-                    {% if form.errors %} <script>scrollToSection('general-settings')</script> {% endif %}
-                    <h2>{{_('Aviso global')}}</h2>
-                    {% from "macros/form_input.html" import render_field %}
-                    {{ render_field(form.title) }}
-                    {{ render_field(form.description) }}
-                    {{ render_field(form.image_link) }}
-                    {{ render_field(form.redirect_link) }}
-                    {{ render_field(form.warning_show) }}
-                    <hr>
-                    <h2>{{ _('Comissões') }}</h2>
-                    {{ render_field(form.form_comms_link) }}
-                    <span class="flex rowFlex wp100 gapMedium alignCenter justifyCenter">
-                        {{ render_field(form.total_slots) }}
-                        {{ render_field(form.used_slots) }}
-                    </span>
-                    {{ render_field(form.comms_open) }}
-                    <button type="submit" class="primaryButton alignEndSelf">{{ _('Salvar') }}</button>
-                </form>
-
-            </div>
+                <h2>{{ _('Comissões') }}</h2>
+                {{ render_field(form.form_comms_link) }}
+                <span class="flex rowFlex wp100 gapMedium alignCenter justifyCenter">
+                    {{ render_field(form.total_slots) }}
+                    {{ render_field(form.used_slots) }}
+                </span>
+                {{ render_field(form.comms_open) }}
+                <hr>
+                <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-floppy-disk"></i>{{ _('Salvar') }}</button>
+            </form>
         </div>
     </section>
 </main>

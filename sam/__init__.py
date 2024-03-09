@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from flask_jwt_extended import JWTManager, exceptions
 from flask_wtf.csrf import CSRFProtect
 from .src.enums import errors as Err
-
+from functools import wraps
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -41,10 +41,10 @@ babel = Babel(app, locale_selector=get_locale)
 def inject_in_template():
     return dict(current_language = get_locale())
 
-#@app.errorhandler(Exception)
-#def handle_error(error):
-#    status_code = getattr(error, 'code', 500)
-#    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
+@app.errorhandler(Exception)
+def handle_error(error):
+    status_code = getattr(error, 'code', 500)
+    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
 
 @jwt.expired_token_loader
 def expired_token_callback(expired_token, callback):

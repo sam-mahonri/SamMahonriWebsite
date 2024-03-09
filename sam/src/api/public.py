@@ -5,6 +5,7 @@ from ..enums import success as Ok
 from .routes import api_bp, OUTPUT_TEMPLATE
 from flask import jsonify
 from bson import ObjectId
+
 @api_bp.route('/general_settings/r/')
 def general_settings_r():
     result = OUTPUT_TEMPLATE

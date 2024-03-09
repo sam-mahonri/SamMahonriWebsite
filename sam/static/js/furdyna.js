@@ -55,17 +55,26 @@ function showFlashMessage(message, type='errorFlash', duration=5000) {
     div.className = `flashMessage ${type} borderBox aos-init`;
     div.dataset.aos = 'zoom-in-right';
     div.dataset.aosDelay = '0';
-    div.dataset.aosDuration = '500';
+    div.dataset.aosDuration = '250';
     div.innerHTML = `<p>${message}</p>`;
     
     flashContainer.appendChild(div);
+    if (duration != 0){
+        smoothErrorElement(div, duration);
+    }
+
+    return div
+}
+
+function smoothErrorElement(element, duration=0){
     setTimeout(() => {
-        div.classList.add('opacity0');
+        element.classList.add('opacity0');
         setTimeout(() => {
-            flashContainer.removeChild(div);
+            element.remove();
         }, 1000);
         
     }, duration);
+
 }
 
 function resetErrorMessages(data, errors) {

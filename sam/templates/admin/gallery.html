@@ -18,6 +18,31 @@
             <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium">
                 <span class="navComp onlyMobile"></span>
                 <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Galeria de imagens') }}</h1>
+                <hr>
+                <div class="wp100 flex rowFlexColumn gapMedium justifyCenter alignCenter">
+                    <form method="POST" action="/api/gallery/w/" id="gallery-form"
+                        class="flex columnFlex form alignStart flexExpand panel"
+                        onsubmit="submitForm(event, this)">
+                        {{ form.csrf_token }}
+                        {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
+                        <h2>{{_('Publicar imagem')}}</h2>
+                        {% from "macros/form_input.html" import render_field %}
+                        {{ render_field(form.title) }}
+                        {{ render_field(form.image) }}
+                        {{ render_field(form.is_artwork) }}
+                        <hr>
+                        <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-upload"></i>{{ _('Publicar') }}</button>
+                    </form>
+
+                    <div class="flex flexExpand columnFlex wp100 hv40 panel">
+                        <div class="imagePlaceholder">
+
+                        </div>
+                        <div class="flex panel wp100 rowFlex disabled disableInputEvents alignCenter" id="req-image-link">
+                            <input type="url" placeholder="{{ _('Link público gerado...') }}" class="flex flexExpand"><button class="primaryButton"><i class="fa-solid fa-copy"></i>{{ _('Copiar') }}</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
