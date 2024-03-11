@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from flask_jwt_extended import JWTManager, exceptions
 from flask_wtf.csrf import CSRFProtect
 from .src.enums import errors as Err
-from functools import wraps
+
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -16,7 +16,7 @@ limiter = Limiter(
     key_func=Config.LIMITER_KEY_FUNC,
     storage_uri=Config.LIMITER_STORAGE_URI,
     app=app,
-    default_limits=["120 per minute", "5 per second"]
+    default_limits=["256 per minute", "50 per second"]
     )
 
 CORS(app)
@@ -41,10 +41,10 @@ babel = Babel(app, locale_selector=get_locale)
 def inject_in_template():
     return dict(current_language = get_locale())
 
-@app.errorhandler(Exception)
-def handle_error(error):
-    status_code = getattr(error, 'code', 500)
-    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
+#@app.errorhandler(Exception)
+#def handle_error(error):
+#    status_code = getattr(error, 'code', 500)
+#    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
 
 @jwt.expired_token_loader
 def expired_token_callback(expired_token, callback):
@@ -58,7 +58,6 @@ def unauthorized_callback(callback):
     flash(Err.Errors.UNAUTHORIZED_ACCESS.value, "error")
     return make_response(render_template("layouts/errorpage.html", error=str(callback), status_code=401), 401)
 
-
 def create_app():
     jwt.init_app(app)
     csrf.init_app(app)
@@ -68,11 +67,13 @@ def create_app():
     from .src.admin.views import admin_bp
     from .src.auth.views import auth_bp
     from .src.api.routes import api_bp
+    from .src.dyna.views import dyna_bp
     
     app.register_blueprint(public_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(api_bp)
+    app.register_blueprint(dyna_bp)
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
     
     return app

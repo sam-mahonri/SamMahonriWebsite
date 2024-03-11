@@ -16,17 +16,14 @@
 
             <div class="flex columnFlex justifyStart alignStartCenter">
                 <span class="navComp onlyMobile"></span>
-                <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Área restrita') }}</h1>
-                
+                <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Entrar') }}</h1>
+                <hr>
                 <form method="POST" action="{{ url_for('auth.login') }}" id="login-form" class="flex columnFlex form alignStart extraMargin">
                     {{ form.csrf_token }}
-                    {% from "macros/form_input.html" import render_field %}
                     {{ render_field(form.username) }}
                     {{ render_field(form.password) }}
                     <button type="submit" class="primaryButton alignEndSelf">{{ _('Entrar') }}</button>
                 </form>
-                
-
             </div>
 
         </div>

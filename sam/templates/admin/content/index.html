@@ -1,0 +1,79 @@
+{% from "macros/form_input.html" import render_field %}
+<style>
+    .back1 {
+        background-image: url('/static/source/backadmin.svg');
+    }
+
+    .back2 {
+        background-image: url('/static/source/backwarn.svg');
+    }
+</style>
+
+<main class="back back1" id="init-main">
+    <section>
+        <div class="flex hv100 wp100 justifyCenter alignStartCenter paddingLarge borderBox columnFlex minusTopNav backFixed">
+            <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium">
+                <span class="navComp onlyMobile"></span>
+                <h1 class="textLeft aos-init babilonicColor" data-aos="fade-left"><i
+                        class="fa-solid fa-lock"></i>{{ _('Olá, Sam!') }}</h1>
+                <hr class="aos-init" data-aos="fade">
+                <h2 class="textLeft aos-init" data-aos="fade-left"><i class="fa-solid fa-chart-line"></i> {{
+                    _('Estatísticas da semana') }}</h2>
+                <div class="flex flexGrid wp100 gapMedium">
+                    <div class="panel flexExpand aos-init" data-aos="fade-up" data-aos-delay="500">
+                        <h2><i class="fa-solid fa-eye"></i>{{ _('Acessos') }}</h2>
+                        <h1>{{ statistics.accesses | default('0')}}</h1>
+                    </div>
+                    <div class="panel flexExpand aos-init" data-aos="fade-up" data-aos-delay="700">
+                        <h2><i class="fa-solid fa-palette"></i>{{ _('Artes') }}</h2>
+                        <h1>{{ statistics.arts | default('0')}}</h1>
+                    </div>
+                    <div class="panel flexExpand aos-init" data-aos="fade-up" data-aos-delay="900">
+                        <h2><i class="fa-solid fa-paw"></i>{{ _('Postagens') }}</h2>
+                        <h1>{{ statistics.posts | default('0')}}</h1>
+                    </div>
+                </div>
+
+                <div class="flex flexGrid gapMedium">
+                    <span class="aos-init" data-aos="fade-up" data-aos-delay="500"><button class="primaryButton"
+                            onclick="scrollToSection('general-settings')"><i class="fa-solid fa-arrow-down"></i>{{
+                            _('Configurações') }}<i class="fa-solid fa-sliders"></i></button></span>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+</main>
+<main class="back back2" id="general-settings">
+    <section>
+        <div class="flex hv100 wp100 justifyCenter paddingLarge borderBox columnFlex gapMedium">
+            <span class="navComp"></span>
+            <h2 class="textLeft aos-init" data-aos="fade-left" style="margin-top: 8px;">
+                <i class="fa-solid fa-sliders"></i>{{ _('Configurações gerais') }}</h2>
+            <form method="POST" action="/api/general_settings/w/" id="general-settings-form"
+                class="flex columnFlex form alignStart panel wp100"
+                onsubmit="submitForm(event, this)">
+                {{ form.csrf_token }}
+                {% if form.errors %} <script>scrollToSection('general-settings')</script> {% endif %}
+                <h2>{{_('Aviso global')}}</h2>
+                {{ render_field(form.title) }}
+                {{ render_field(form.description) }}
+                {{ render_field(form.image_link) }}
+                {{ render_field(form.redirect_link) }}
+                {{ render_field(form.warning_show) }}
+                <hr>
+                <h2>{{ _('Comissões') }}</h2>
+                {{ render_field(form.form_comms_link) }}
+                <span class="flex rowFlex wp100 gapMedium alignCenter justifyCenter">
+                    {{ render_field(form.total_slots) }}
+                    {{ render_field(form.used_slots) }}
+                </span>
+                {{ render_field(form.comms_open) }}
+                <hr>
+                <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-floppy-disk"></i>{{ _('Salvar') }}</button>
+            </form>
+        </div>
+    </section>
+</main>

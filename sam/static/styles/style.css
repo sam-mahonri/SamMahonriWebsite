@@ -4,6 +4,7 @@
 
 * {
     transition-duration: var(--transition-duration);
+    box-sizing: border-box;
 }
 
 html,
@@ -15,7 +16,7 @@ body {
 }
 
 h1 {
-    line-height: 48px;
+    line-height: 52px;
     font-size: var(--h1-text-size);
     font-weight: 900;
     overflow: visible;
@@ -70,6 +71,11 @@ span {
     margin-bottom: 16px;
 }
 
+a {
+    user-select: none;
+    cursor: pointer;
+}
+
 p,
 a,
 label,
@@ -81,13 +87,98 @@ textarea {
     color: var(--current-text-color);
 }
 
+.slider {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    overflow-x: hidden;
+}
 
+.line {
+    position: absolute;
+    opacity: 0.4;
+    background: var(--theme-color);
+    width: 150%;
+    height: 5px;
+}
+
+.subline {
+    position: absolute;
+    background: var(--theme-color);
+    height: 5px;
+}
+
+.inc {
+    animation: increase 2s infinite;
+}
+
+.dec {
+    animation: decrease 2s 0.5s infinite;
+}
+
+@keyframes increase {
+    from {
+        left: -5%;
+        width: 5%;
+    }
+
+    to {
+        left: 130%;
+        width: 100%;
+    }
+}
+
+@keyframes decrease {
+    from {
+        left: -80%;
+        width: 80%;
+    }
+
+    to {
+        left: 110%;
+        width: 10%;
+    }
+}
+
+@keyframes moving {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.spinner {
+    border: 3px solid var(--theme-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 input,
 textarea {
     outline-style: none;
     box-sizing: border-box;
-    border-radius: var(--border-2-radius);
+    border-radius: var(--border-3-radius);
     padding: var(--padding-small);
     background-color: var(--neutral-color);
     border: solid 1px var(--neutral-color);
@@ -100,7 +191,7 @@ textarea:focus {
     background-color: var(--theme-color-trans);
 }
 
-input[type=file]{
+input[type=file] {
     padding: 0 !important;
 }
 
@@ -165,6 +256,7 @@ form textarea {
 }
 
 .a {
+
     opacity: 0.7;
     transition: opacity var(--transition-duration) ease-in-out;
 }
@@ -195,12 +287,14 @@ form textarea {
 .aT:focus,
 .aT:active,
 .activeAT {
+
     background-size: 100% 0.2em;
     background-position-x: 0%;
     opacity: 1;
 }
 
 .activeAT {
+    pointer-events: none;
     box-shadow: 0 8px 16px -8px var(--theme-color);
 }
 
@@ -270,14 +364,35 @@ section {
     width: 100%;
 }
 
+.popDialog{
+    position: fixed;
+    display: flex;
+    top: 0px;
+    left: 0px;
+    background-color: var(--sec-dark);
+    min-height: 100vh;
+    max-height: 100vh;
+    height: fit-content;
+    width: 100%;
+    overflow-y: auto;
+    z-index: 4;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    
+}.popDialog > section{
+    padding: var(--padding-large);
+}
+
 nav {
-    z-index: 100;
+    z-index: 3;
     position: fixed !important;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     overflow: hidden;
+    border-bottom: solid 1px var(--neutral-color);
 }
 
 nav .aT {
@@ -295,7 +410,7 @@ nav *{
 */
 
 .navComp {
-    height: 72px;
+    min-height: 92px;
 }
 
 .onlyMobile {
@@ -354,8 +469,16 @@ nav *{
     width: 100%;
 }
 
+.wpFit {
+    width: fit-content;
+}
+
 .hp100 {
     height: 100%;
+}
+
+.hpFit{
+    height: fit-content;
 }
 
 .flex {
@@ -381,6 +504,12 @@ nav *{
     background-size: 200%;
     box-shadow: 0 10px 32px var(--theme-color-trans);
     translate: 0 -4px;
+}
+
+.fixed {
+    position: fixed;
+    top: 0px;
+    left: 0px;
 }
 
 .goUpBt {
@@ -415,6 +544,7 @@ nav *{
     gap: var(--gap-small);
     min-width: 128px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 hr {
@@ -440,6 +570,7 @@ hr {
     max-height: 100%;
     overflow-y: auto;
     gap: var(--gap-medium);
+    z-index: 5;
 }
 
 .flashMessage {
@@ -497,9 +628,10 @@ hr {
 .selectorButton {
     padding: 16px;
     border-radius: 50%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1/1 !important;
     background-color: var(--neutral-color);
     height: 48px;
+    width: 48px;
 }
 
 .plainButton {
@@ -672,9 +804,29 @@ footer {
     flex: 1;
     background-color: var(--neutral-color);
     border: solid 1px var(--neutral-color);
-    background-position: center;
-    background-size: cover;
+    overflow: hidden;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
+.imagePlaceholder>img {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+}
+
+.imagePlaceholder>p {
+    width: 100%;
+    min-height: 0px;
+    text-align: center;
+    z-index: 1;
+    margin: 8px;
 }
 
 @keyframes onRailLoading {

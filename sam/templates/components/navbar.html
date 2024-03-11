@@ -1,4 +1,6 @@
-<nav class="navbar borderBox noBack justifyCenter topInvScroll" class-on-scroll="applyNoBack">
+<nav class="navbar borderBox noBack justifyCenter topInvScroll" class-on-scroll="applyNoBack" id="main-navbar">
+    {% from "macros/loading_slider.html" import render_slider_loading %}
+    {{ render_slider_loading('nav-loading') }}
     <section class="flex rowFlexColumn borderBox gapLarge">
         <span class="flex rowFlex alignCenter justifyCenter">
             <a href="/" class="flex rowFlex alignCenter justifyCenter">
@@ -15,14 +17,14 @@
             </a>
             <span class="flexExpand"></span>
             
-            <button onclick="toggleMenu(this)" class="selectorButton onlyMobile">
+            <button onclick="toggleMenu(this)" class="selectorButton onlyMobile" id="mobile-expand-nav">
                 <i class="fa-solid fa-bars"></i>
             </button>
             
         </span>
         
         <span class="flexExpand"></span>
-        <div class="flex rowFlexColumn justifyCenter alignCenter gapLarge">
+        <div class="flex rowFlexColumn justifyCenter alignCenter gapLarge" id="main-navbar-links">
 
             {% if (session['user'] and not request.path.startswith('/admin')) or not session['user'] %}
                 <a href="/" class="aT {{ 'activeAT' if request.path == '/' else '' }}">{{ _('Início') }}</a>
@@ -30,9 +32,9 @@
                 <a href="#" class="aT {{ 'activeAT' if request.path.startswith('/projects') else '' }}">{{ _('Projetos')}}</a>
                 <a href="#" class="aT {{ 'activeAT' if request.path.startswith('/arts') else '' }}">{{ _('Artes') }}</a>
             {% else %}
-                <a href="/admin/" class="aT {{ 'activeAT' if request.path == '/admin/' else '' }}">{{ _('Painel') }}</a>
-                <a href="/admin/gallery" class="aT {{ 'activeAT' if request.path.startswith('/admin/gallery') else '' }}">{{ _('Galeria') }}</a>
-                <a href="/" class="aT {{ 'activeAT' if request.path.startswith('/admin/comms') else '' }}">{{ _('Comissões') }}</a>
+                <a class="aT {{ 'activeAT' if request.path == '/admin/' else '' }}" onclick="changePage('/admin/c/', null, this)">{{ _('Painel') }}</a>
+                <a class="aT {{ 'activeAT' if request.path.startswith('/admin/gallery') else '' }}" onclick="changePage('/admin/c/gallery', null, this)">{{ _('Galeria') }}</a>
+                <a href="/" class="aT {{ 'activeAT' if request.path.startswith('/admin/comms') else '' }}" >{{ _('Comissões') }}</a>
                 <a href="/" class="aT {{ 'activeAT' if request.path.startswith('/admin/news') else '' }}">{{ _('Novidades') }}</a>
             {% endif %}
                 <button id="themeBtn" class="selectorButton themeSelector" title="{{ _('Alternar esquema de cores') }}">
@@ -48,20 +50,12 @@
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </button></a>
             {% endif %}
-            <div class="onlyMobile">
-                {% include 'components/lang.html' %}
-            </div>
+            
         </div>
-        
+        <div class="onlyMobile flex justifyCenter alignCenter">
+            {% include 'components/lang.html' %}
+        </div>
         <span class="flexExpand onlyMobile"></span>
     </section>
+    
 </nav>
-
-<script>
-function toggleMenu(bt) {
-  var navbar = document.querySelector('.navbar');
-  navbar.classList.toggle('noCollapsed');
-  if(navbar.classList.contains('noCollapsed')){ bt.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>'}
-  else{bt.innerHTML = '<i class="fa-solid fa-bars"></i>'}
-};
-</script>

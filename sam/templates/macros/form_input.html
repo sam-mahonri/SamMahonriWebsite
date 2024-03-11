@@ -1,25 +1,42 @@
-{% macro render_field(field) %}
-    
+{% macro render_field(field, onchange="") %}
+<div class="flex columnFlex wp100">
     {% if field.type == 'BooleanField' %}
-        <div>
-            <label class="checkbox-label">
-                <p>{{ field.label.text }}</p>
-                {{ field() }}
-                <span class="checkmark"></span>
-            </label>
-        </div>
-            
+        <label class="checkbox-label">
+            <p>{{ field.label.text }}</p>
+            {{ field(onchange=onchange) }}
+            <span class="checkmark"></span>
+        </label>
     {% else %}
-        <div class="flex columnFlex wp100">
-            <div class="innerLabel">
-                {{ field(placeholder=' ', class="errorInput" if field.errors else "") }}
-                <span>{{ field.label.text }}</span>
+        <div class="innerLabel">
+            {{ field(placeholder=' ', class="errorInput" if field.errors else "", onchange=onchange) }}
+            <span>
+                {% set icon_class = {'StringField': 'fas fa-font', 'IntegerField': 'fas fa-number', 'FloatField': 'fas fa-decimal', 'DateField': 'fas fa-calendar-alt', 'DateTimeField': 'fas fa-calendar-alt', 'TimeField': 'fas fa-clock', 'TextAreaField': 'fas fa-align-left', 'PasswordField': 'fas fa-lock', 'FileField': 'fas fa-file', 'SubmitField': 'fas fa-paper-plane'} %}
+                {% if field.type in icon_class %}
+                    <i class="{{ icon_class[field.type] }}"></i>
+                {% else %}
+                    <i class="fas fa-question-circle"></i>
+                {% endif %}
+
+                {{ field.label.text }}
+
+                {% if field.flags.required %}
+                    <i style="color: var(--error-color);">●</i>
+                {% else %}
+            </span>
+            
                 
-            </div>
-            {% if field.errors %}
-                <span class="tag backRed">{{ field.errors[0] }}</span>
             {% endif %}
         </div>
-        
     {% endif %}
+    {% if field.errors %}
+        <span class="tag backRed">{{ field.errors[0] }}</span>
+    {% endif %}
+</div>
 {% endmacro %}
+
+{% macro render_copy_field(id="generic-copy-field") %}
+<div class="flex panel wp100 rowFlex hideElement alignCenter successBorder" id="{{ id }}">
+    <input type="url" class="flex flexExpand" id="{{ id + '_link_input'}}"><button type="button" class="selectorButton" title="{{ _('Copiar') }}" onclick="copyText(this.previousElementSibling.id)"><i class="fa-solid fa-copy"></i></button>
+</div>
+{% endmacro %}
+

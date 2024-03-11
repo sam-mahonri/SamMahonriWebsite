@@ -18,6 +18,10 @@
 </head>
 <body>
     {% include 'components/all.html' %}
+    {% from "macros/form_input.html" import render_field, render_copy_field %}
+    {% from "macros/img_view.html" import render_img_view %}
+    
+
     {% block navbar %}
         {% with current_page = 'home'%}
             {% include 'components/navbar.html' %}
@@ -25,22 +29,23 @@
     {% endblock %}
 
     
-
-    {% block content %}
-    <main>
-        <section>
-            
-        </section>
-    </main>
-    {% endblock %}
+    <div class="wp100 hv100" id="all-content">
+        {% block content %}
+        <main>
+            <section>
+                
+            </section>
+        </main>
+        {% endblock %}
+    </div>
+    
 
     {% block footer %}
         {% include 'components/footer.html' %}
     {% endblock %}
 
-    
-
     {% include 'components/messages.html' %}
+    {% include 'components/pop_dialog.html' %}
 
     <button class="selectorButton goUpBt topInvScroll" class-on-scroll="opacity0" offset-on-scroll="256" onclick="scrollToSection('init-main', 1000)"><i class="fa-solid fa-angles-up"></i></button>
 

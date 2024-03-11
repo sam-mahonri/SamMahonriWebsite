@@ -36,15 +36,26 @@
         REQUEST_ERROR: "{{ _('Ocorreu um erro ao completar a solicitação.') }}",
         NOT_FOUND: "{{ _('Item não encontrado.') }}",
         ACCESS_DENIED: "{{ _('Você não tem permissão para realizar esta ação.') }}",
-        UNAUTHORIZED: "{{ _('Você precisa estar autenticado para realizar esta ação.') }}"
+        UNAUTHORIZED: "{{ _('Você precisa estar autenticado para realizar esta ação.') }}",
+        COPY_ERROR: "{{ _('Ocorreu um erro ao copiar o texto.') }}",
+        COPY_UNSUPPORTED: "{{ _('Seu navegador restringiu a copia, realize a copia manualmente.') }}",
+        IMAGE_NOT_ALLOWED: "{{ _('Por favor, selecione um arquivo de imagem válido (.png, .jpg, .jpeg, .gif).') }}",
     });
 
     const DEF = Object.freeze({
         LOADING: "{{ _('Carregando...') }}",
-        PROCCESSING: "{{ _('Processando...') }}"
+        PROCCESSING: "{{ _('Processando...') }}",
+        
     });
+
+    const OK = Object.freeze({
+        COPIED: "{{ _('Texto copiado!') }}"
+    })
+
+    const DEFAULT_LOADING_SPINNER = `{% include 'components/loading_spinner.html' %}`
 </script>
 
 <script src="{{ url_for('static', filename='js/furtheme.js') }}"></script>
 <script src="{{ url_for('static', filename='js/furdyna.js') }}"></script>
 <script src="{{ url_for('static', filename='js/furfetch.js') }}"></script>
+<script src="{{ url_for('static', filename='js/furcallbacks.js') }}"></script>

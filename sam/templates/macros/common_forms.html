@@ -1,0 +1,32 @@
+{% macro render_image_upload_form(form, api_link='/api/gallery/image', callback="", id="image-uploader") %}
+{% from "macros/form_input.html" import render_field, render_copy_field %}
+{% from "macros/img_view.html" import render_img_view %}
+
+    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="500">
+        <form method="POST" action="{{ api_link }}" id="{{ id }}"
+            class="flex columnFlex form alignStart flexExpand panel hpFit"
+            onsubmit="submitForm(event, this, '{{ callback }}', id)">
+            {{ form.csrf_token }}
+            {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
+            <h2>{{_('Publicar imagem')}}</h2>
+            
+            {{ render_field(form.title) }}
+            {{ render_field(form.image, 'imgPreview(this, "' + id + '-img-preview")') }}
+            {{ render_field(form.redirect_link) }}
+            {{ render_field(form.is_artwork) }}
+            <hr>
+            <button type="submit" class="primaryButton alignEndSelf" onclick="popupCallback = ['refreshImgs', {}]"><i class="fa-solid fa-upload"></i>{{ _('Publicar') }}</button>
+        </form>
+
+        <div class="flex flexExpand columnFlex wp100 hp100 gapSmall">
+            <div class="flex columnFlex wp100 alignCenter justifyCenter hideElement opacity0 gapMedium" id="{{ id + '-success-section'}}">
+                <h1 class="successColor">{{_('Imagem publicada!')}}</h1>
+                {{ render_copy_field(id + '-req-img-link') }}
+                <button class="primaryButton alignCenterSelf wpFit" onclick="elementVisible('{{ id }}' + '-success-section', false); elementVisible('{{ id }}', true); imgPreview(null, '{{ id }}' + '-img-preview');" id="{{ id + '-bt-new-img' }}"><i class="fa-solid fa-image"></i>{{ _('Nova imagem') }}</button>
+            </div>
+            {{ render_img_view(id + '-img-preview') }}
+            
+        </div>
+    </div>
+
+{% endmacro %}

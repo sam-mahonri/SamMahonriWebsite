@@ -43,6 +43,7 @@ class PostForm(FlaskForm):
     content = TextAreaField(lazy_gettext('Conteúdo'), validators=[InputRequired(), Length(min=3, max=10000)])
 
 class GalleryForm(FlaskForm):
-    title = StringField(lazy_gettext('Nome da imagem'), validators=[Length(max=20)])
+    title = StringField(lazy_gettext('Nome da imagem'), validators=[InputRequired(), Length(max=20)])
     is_artwork = BooleanField(lazy_gettext('Listar na galeria de artes'))
-    image = FileField(lazy_gettext('Arquivo de imagem'), validators=[FileAllowed(['jpg', 'png', 'jpeg', 'gif'], lazy_gettext('Apenas imagens do tipo .jpg, .png, .gif e .jpeg!'))])
+    redirect_link = StringField(lazy_gettext('Link alternativo (Ex.: Postagem em rede social)'), validators=[Optional(), URL()])
+    image = FileField(lazy_gettext('Arquivo de imagem'), validators=[InputRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'gif'], lazy_gettext('Apenas imagens do tipo .jpg, .png, .gif e .jpeg!'))])

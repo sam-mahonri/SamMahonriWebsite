@@ -10,9 +10,10 @@ class Config:
     FLASK_DEBUG = os.getenv('FLASK_DEBUG')
     FLASK_ENV = os.getenv('FLASK_ENV')
     
+    URL_BASE = os.getenv('URL_BASE')
     SECRET_KEY = os.getenv('SECRET_KEY')
-    UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER')
-
+    UPLOAD_PATH = os.getenv('UPLOAD_PATH')
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     LIMITER_ENABLED = True
     LIMITER_STORAGE_URI = "memory://"
     LIMITER_KEY_FUNC = get_remote_address

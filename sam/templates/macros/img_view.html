@@ -1,0 +1,11 @@
+{% macro render_img_view(id="generic-img-view", message=_("Visualização"), image_link="") %}
+<div class="imagePlaceholder">
+    <img src="{{ image_link }}" id="{{ id }}" class="hideElement">
+    {% if message|length > 0 %}
+        <p>
+            {{ message }}
+        </p>
+    {% endif %}
+    
+</div>
+{% endmacro %}
