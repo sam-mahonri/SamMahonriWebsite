@@ -20,6 +20,6 @@ def favicon(): return send_file('static/favicon.svg')
 @public_bp.route("/gallery/image/<img>")
 def get_image(img):
 
-    path = app.config.get('UPLOAD_FOLDER', 'static/files')
+    path = app.config.get('UPLOAD_PATH', '/static/files')
 
     return send_from_directory(path, img)
