@@ -35,7 +35,7 @@ class Gallery:
         return result.modified_count > 0
 
     @classmethod
-    def find(cls, page=1, per_page=10, is_artwork=None, title=None):
+    def find(cls, page=1, per_page=9, is_artwork=None, title=None):
         filter_query = {}
         if is_artwork is not None:
             filter_query['is_artwork'] = is_artwork

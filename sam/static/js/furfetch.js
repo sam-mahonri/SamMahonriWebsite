@@ -14,8 +14,9 @@ async function handleRequestErrors(response) {
 }
 
 async function submitForm(event, form, callback = null) {
-    const loadingFlash = showFlashMessage(DEF.PROCCESSING, 'loadingFlash', 0);
+    
     event.preventDefault();
+    const loadingFlash = showFlashMessage(DEF.PROCCESSING, 'loadingFlash', 0);
     form.classList.add('disabled');
     form.classList.add('disableInputEvents');
 
@@ -101,19 +102,30 @@ function executeCallbacks(callback = "self" , target, data){
 
 // Função para povoar a grade de imagens
 
-
+var pageImage = 1
 // Função para obter as imagens da API e povoar a grade de imagens
-function fetchImages() {
-    fetch('/api/gallery/list') // Faz uma solicitação GET para a API
+async function fetchImages(nextPage = false) {
+    const loadingFlash = showFlashMessage(DEF.LOADING, 'loadingFlash', 0);
+    if(nextPage) pageImage++;
+    else pageImage = 1;
+
+    await fetch('/api/gallery/list' + "?page=" + String(pageImage)) // Faz uma solicitação GET para a API
     .then(response => response.json()) // Converte a resposta em JSON
     .then(data => {
         if (data.success) {
-            populateImageGrid(data.data.images); // Povoar a grade de imagens com as imagens obtidas
+            populateImageGrid(data.data.images, nextPage ? true : false); // Povoar a grade de imagens com as imagens obtidas
         } else {
-            console.error('Erro ao obter imagens:', data.message); // Log de erro se houver problema ao obter as imagens
+            showFlashMessage(data.message, "warningFlash")
+            console.log('Erro ao obter imagens:', data.message); // Log de erro se houver problema ao obter as imagens
         }
     })
     .catch(error => {
         console.error('Erro ao obter imagens:', error); // Log de erro se houver um erro de rede ou outro erro durante a solicitação
     });
+
+    setTimeout(() => {
+        smoothErrorElement(loadingFlash, 250);
+    }, 500);
+
+    //smoothErrorElement(loadingFlash, 250);
 }

@@ -2,7 +2,7 @@
 {% from "macros/form_input.html" import render_field, render_copy_field %}
 {% from "macros/img_view.html" import render_img_view %}
 
-    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="500">
+    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
         <form method="POST" action="{{ api_link }}" id="{{ id }}"
             class="flex columnFlex form alignStart flexExpand panel hpFit"
             onsubmit="submitForm(event, this, '{{ callback }}', id)">

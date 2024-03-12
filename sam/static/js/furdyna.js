@@ -226,10 +226,8 @@ function updateUrl(newUrl) { history.pushState(null, null, newUrl); }
 async function changePage(c_page, r_page = null, self_link = null) { // Atualiza o conteúdo da página sem carregá-la novamente
     if (!r_page) r_page = c_page.replace("c/", "");
 
-    scrollToSection('all-content', 500);
-
     placeholderLoading('nav-loading')
-
+    scrollToSection('all-content', 500);
     await addTemplate(c_page, 'all-content', true, false);
 
     setTimeout(() => {
@@ -276,22 +274,91 @@ function copyText(idInput) {
     }
 }
 
-function populateImageGrid(images) {
+
+
+function populateImageGrid(images, update = false) {
     const gridContainer = document.getElementById('imageGrid');
-    gridContainer.innerHTML = '';
+    if (!update) gridContainer.innerHTML = '';
 
     images.forEach((image, index) => {
         setTimeout(() => {
-        const imageElement = document.createElement('img');
-        imageElement.classList.add('aos-init');
-        imageElement.dataset.aos = 'fade-up';
-        imageElement.dataset.aosDelay = '0';
-        imageElement.src = image.image_links.thumbnail;
-        imageElement.alt = image.title;
+            const container = document.createElement('div');
+            container.classList.add('image-container');
 
-        gridContainer.appendChild(imageElement);
-        
-        imageElement.classList.add('active');
+            const imageElement = document.createElement('img');
+            imageElement.classList.add('aos-init');
+            imageElement.dataset.aos = 'fade-up';
+            imageElement.dataset.aosDelay = '0';
+            imageElement.src = image.image_links.thumbnail;
+            imageElement.alt = image.title;
+
+            const overlay = document.createElement('div');
+            overlay.classList.add('overlay');
+
+            const title = document.createElement('h3');
+            title.textContent = image.title;
+
+            const tag = document.createElement('span');
+            tag.classList.add('tag');
+            tag.innerHTML = '<i class="fas fa-paint-brush"></i>';
+
+            overlay.appendChild(title);
+            if (image.is_artwork) overlay.appendChild(tag);
+
+            if (image.redirect_link) {
+                const link = document.createElement('a');
+                link.href = image.redirect_link;
+                link.appendChild(imageElement);
+                container.appendChild(link);
+            } else {
+                container.appendChild(imageElement);
+            }
+
+            container.appendChild(overlay);
+
+            gridContainer.appendChild(container);
+
+            imageElement.classList.add('active');
+
+            if (index === images.length - 1){
+                lockCheckScrollEnd = false;
+                checkScrollEnd(selector = '#imageGrid .image-container:last-child');
+            }
+
         }, index * 250);
     });
+}
+
+var lockCheckScrollEnd = false;
+
+function checkScrollEnd(selector) {
+    let requestId;
+    
+    function handleScroll() {
+        const lastElement = document.querySelector(selector);
+        if (lastElement) {
+            const lastElementRect = lastElement.getBoundingClientRect();
+            if (lastElementRect.bottom <= window.innerHeight && !lockCheckScrollEnd) {
+                fetchImages(true);
+                lockCheckScrollEnd = true;
+            }
+        }
+        requestId = null; // Limpa o requestId após a execução para evitar múltiplas execuções desnecessárias
+    }
+
+    function requestCheckScrollEnd() {
+        if (!requestId) {
+            requestId = window.requestAnimationFrame(handleScroll);
+        }
+    }
+
+    window.addEventListener('scroll', requestCheckScrollEnd);
+
+    // Chama a função uma vez para verificar o estado inicial
+    requestCheckScrollEnd();
+
+    // Retorna uma função para remover o event listener quando não for mais necessário
+    return function () {
+        window.removeEventListener('scroll', requestCheckScrollEnd);
+    };
 }
