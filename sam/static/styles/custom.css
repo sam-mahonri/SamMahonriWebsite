@@ -5,7 +5,7 @@
     backdrop-filter: blur(0px) !important;
     background-color: transparent !important;
     box-shadow: 0px 0px 0px transparent !important;
-    border-color: transparent;
+    border-color: var(--neutral-color);
 }
 
 nav{

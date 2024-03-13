@@ -45,16 +45,7 @@ def admin(only_data = False):
     if not only_data: return render_template('admin/index.html', statistics=statistics, form = form)
     else: return statistics, form
 
-@admin_bp.route("/c/")
-@jwt_required()
-def c_admin():
-    statistics, form = admin(True)
-    return render_template('admin/content/index.html', statistics=statistics, form = form)
-
 
 @admin_bp.route("/gallery", methods=['POST', 'GET'])
 @jwt_required()
 def gallery(): return render_template('admin/gallery.html')
-@admin_bp.route("/c/gallery")
-@jwt_required()
-def c_gallery(): return render_template('admin/content/gallery.html')

@@ -50,6 +50,13 @@ class Gallery:
         return images
 
     @classmethod
+    def get_by_id(cls, image_id):
+        image = cls.collection.find_one({'_id': ObjectId(image_id)})
+        if image:
+            image['_id'] = str(image['_id'])
+        return image
+    
+    @classmethod
     def delete(cls, image_id):
         result = cls.collection.delete_one({'_id': ObjectId(image_id)})
         return result.deleted_count > 0

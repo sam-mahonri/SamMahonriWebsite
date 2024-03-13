@@ -1,4 +1,4 @@
-from flask import Flask, request, session, render_template, flash, make_response
+from flask import Flask, request, session, render_template, flash, make_response, jsonify
 from config import Config
 from flask_cors import CORS
 from flask_babel import Babel, _
@@ -10,6 +10,11 @@ from flask_wtf.csrf import CSRFProtect
 from .src.enums import errors as Err
 
 app = Flask(__name__)
+
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 app.config.from_object(Config)
 
 limiter = Limiter(
@@ -43,6 +48,7 @@ def inject_in_template():
 
 #@app.errorhandler(Exception)
 #def handle_error(error):
+#    print(error)
 #    status_code = getattr(error, 'code', 500)
 #    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
 

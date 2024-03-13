@@ -4,7 +4,7 @@
 
     <div class="wp100 flex rowFlexColumn gapMedium justifyCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
         <form method="POST" action="{{ api_link }}" id="{{ id }}"
-            class="flex columnFlex form alignStart flexExpand panel hpFit"
+            class="flex columnFlex form alignStart flexExpand hpFit"
             onsubmit="submitForm(event, this, '{{ callback }}', id)">
             {{ form.csrf_token }}
             {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}

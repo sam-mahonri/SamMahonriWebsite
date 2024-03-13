@@ -469,6 +469,10 @@ nav *{
     width: 100%;
 }
 
+.forceWp100{
+    max-width: 100% !important;
+}
+
 .wpFit {
     width: fit-content;
 }
@@ -741,7 +745,7 @@ hr {
 }
 
 .spc32 {
-    height: 32px;
+    min-height: 32px;
 }
 
 .flexGrid {
@@ -839,18 +843,76 @@ footer {
     }
 }
 
-/*
-footer *{
-    color: var(--light-color) !important;
-}
-*/
-
 .onlyDesktop {
     visibility: visible;
 }
 
 .flexExpand {
     flex: 1;
+}
+
+.gridContainer {
+    
+    overflow: hidden;
+    border-radius: var(--border-2-radius);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.gridContainer img {
+    
+    min-width: 360px;
+    flex: 1;
+    height: 50vh;
+    object-fit: cover;
+}
+
+.imageContainer {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    min-width: 360px;
+    flex: 1;
+    height: 40vh;
+}
+
+.imageContainer:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--sec-dark);
+    color: var(--current-text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.imageContainer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay .tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--current-text-color);
 }
 
 ::-webkit-scrollbar {

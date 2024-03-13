@@ -1,11 +1,31 @@
-{% macro render_img_view(id="generic-img-view", message=_("Visualização"), image_link="") %}
+{% macro render_img_view(id="generic-img-view", message=_("Visualização"), image_link="", created_at=None, updated_at=None) %}
 <div class="imagePlaceholder">
-    <img src="{{ image_link }}" id="{{ id }}" class="hideElement">
     {% if message|length > 0 %}
         <p>
             {{ message }}
         </p>
     {% endif %}
+    {% if image_link != "" %}
+    <div id="{{ id }}_loader" class="wp100 hv40 flex alignCenter justifyCenter">{% include 'components/loading_spinner.html' %}</div>
+    {% endif %}
+    <img src="{{ image_link }}" id="{{ id }}" class="{{ 'hideElement' if image_link == '' else ''}}" onload="document.getElementById('{{ id }}_loader').style.display = 'none';">
     
+    {% if created_at %}
+        <p>
+            <i class="fa-solid fa-calendar-days"></i>
+            {% set formatted_datetime = created_at.strftime("%d &bull; %m &bull; %Y %H:%M:%S") %}
+            {{ formatted_datetime | safe }}
+        </p>
+    {% endif %}
+    {% if updated_at and created_at != updated_at %}
+        <p>
+            <i class="fa-solid fa-rotate"></i>
+            {% set formatted_datetime = updated_at.strftime("%d &bull; %m &bull; %Y %H:%M:%S") %}
+            {{ formatted_datetime | safe }}
+        </p>
+    {% endif %}
 </div>
+{% endmacro %}
+
+{% macro render_image_actions(id="generic-image-actions", redirect_link="", download=false, edit_api_link="") %}
 {% endmacro %}

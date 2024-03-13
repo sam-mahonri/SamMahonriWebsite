@@ -64,6 +64,7 @@ def upload_image():
             if warn.get('success', False): 
                 image_id = Gallery.create(form.title.data, warn.get("url"), warn.get("compressed_path"), warn.get("resized_path"), form.redirect_link.data, form.is_artwork.data)
                 if image_id:
+                    if form.is_artwork.data: Statistics.update('arts')
                     result = {"success": True, "message": Ok.Success.SUCCESS_UPLOAD.value}
                 else:
                     result = {"success": False, "message": Err.Errors.DB_SAVE_PROBLEM.value}

@@ -12,7 +12,7 @@ URL_BASE = app.config['URL_BASE']
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def save_image(file, ignore_original=False, percent=50, ignore_cropped=False):
+def save_image(file, ignore_original=False, percent=40, ignore_cropped=False):
     load_dotenv()
     try:
         if file and allowed_file(file.filename):
@@ -21,8 +21,8 @@ def save_image(file, ignore_original=False, percent=50, ignore_cropped=False):
             file.save(file_path)
 
             if file.content_type == 'image/gif':
-                compressed_path = file_path
-                resized_path = file_path
+                compressed_path = unique_filename
+                resized_path = unique_filename
             else:
                 compressed_path = compress_image(file_path)
                 resized_path = resize_image(file_path, percent=percent) if not ignore_cropped else ''

@@ -16,7 +16,8 @@ async function handleRequestErrors(response) {
 async function submitForm(event, form, callback = null) {
     
     event.preventDefault();
-    const loadingFlash = showFlashMessage(DEF.PROCCESSING, 'loadingFlash', 0);
+    placeholderLoading('nav-loading')
+    const loadingFlash = showFlashMessage(DEF.PROCESSING, 'loadingFlash', 0);
     form.classList.add('disabled');
     form.classList.add('disableInputEvents');
 
@@ -42,7 +43,6 @@ async function submitForm(event, form, callback = null) {
             executeCallbacks(callback, form.id, req_data)
         }
     } catch (error) {
-        console.error('Erro ao enviar o formulário:', error.message);
         showFlashMessage(error.message, 'errorFlash');
         return error.status;
     } finally {
@@ -50,10 +50,10 @@ async function submitForm(event, form, callback = null) {
             form.classList.remove('disabled');
             form.classList.remove('disableInputEvents');
             smoothErrorElement(loadingFlash, 250);
+            placeholderLoading('nav-loading', false)
         }, 500);
-        
-        
     }
+    
 }
 
 async function addTemplate(urlRota, elementoId, executarScripts = false, showLoading = true) {
@@ -84,7 +84,6 @@ async function addTemplate(urlRota, elementoId, executarScripts = false, showLoa
             }
         }
     } catch (error) {
-        console.error('Ocorreu um erro:', error.message);
         showFlashMessage(error.message, 'errorFlash');
         if (elemento) {
             elemento.innerHTML = '';
@@ -105,26 +104,25 @@ function executeCallbacks(callback = "self" , target, data){
 var pageImage = 1
 // Função para obter as imagens da API e povoar a grade de imagens
 async function fetchImages(nextPage = false) {
-    const loadingFlash = showFlashMessage(DEF.LOADING, 'loadingFlash', 0);
+    placeholderLoading('nav-loading');
     if(nextPage) pageImage++;
     else pageImage = 1;
 
-    await fetch('/api/gallery/list' + "?page=" + String(pageImage)) // Faz uma solicitação GET para a API
-    .then(response => response.json()) // Converte a resposta em JSON
+    await fetch('/api/gallery/list' + "?page=" + String(pageImage))
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
-            populateImageGrid(data.data.images, nextPage ? true : false); // Povoar a grade de imagens com as imagens obtidas
+            populateImageGrid(data.data.images, nextPage ? true : false);
         } else {
             showFlashMessage(data.message, "warningFlash")
-            console.log('Erro ao obter imagens:', data.message); // Log de erro se houver problema ao obter as imagens
         }
     })
     .catch(error => {
-        console.error('Erro ao obter imagens:', error); // Log de erro se houver um erro de rede ou outro erro durante a solicitação
+        showFlashMessage(error, "errorFlash")
     });
 
     setTimeout(() => {
-        smoothErrorElement(loadingFlash, 250);
+        placeholderLoading('nav-loading', false)
     }, 500);
 
     //smoothErrorElement(loadingFlash, 250);

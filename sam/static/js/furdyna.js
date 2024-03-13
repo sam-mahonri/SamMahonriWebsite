@@ -178,8 +178,6 @@ function resetForm(formId) {
     const form = document.getElementById(formId);
     if (form) {
         form.reset();
-    } else {
-        console.error('Formulário não encontrado.');
     }
 }
 
@@ -195,7 +193,7 @@ function showLinkToCopy(LinkCopyId, link) {
 }
 
 
-// AVISO: Este script executa todos os scripts de uma página recém modificada em um innerHTML(exemplo), tenha certeza que todos os elementos do HTML Jinja2 esteja livre de códigos maliciosos para evitar ataques XSS
+// [obsoleto] AVISO: Este script executa todos os scripts de uma página recém modificada em um innerHTML(exemplo), tenha certeza que todos os elementos do HTML Jinja2 esteja livre de códigos maliciosos para evitar ataques XSS
 function setInnerHTML(elm, html) {
     elm.innerHTML = html;
 
@@ -223,12 +221,17 @@ function removeAllClasses(element, selector = 'a', classToRemove = "activeAT") {
 
 function updateUrl(newUrl) { history.pushState(null, null, newUrl); }
 
-async function changePage(c_page, r_page = null, self_link = null) { // Atualiza o conteúdo da página sem carregá-la novamente
+window.addEventListener('beforeunload', function(event) {
+    placeholderLoading('nav-loading');
+});
+
+async function changePage(c_page, r_page = null, self_link = null) { // [obsoleto] Atualiza o conteúdo da página sem carregá-la novamente
     if (!r_page) r_page = c_page.replace("c/", "");
 
     placeholderLoading('nav-loading')
-    scrollToSection('all-content', 500);
+    
     await addTemplate(c_page, 'all-content', true, false);
+    scrollToSection('all-content', 0);
 
     setTimeout(() => {
         placeholderLoading('nav-loading', false)
@@ -274,58 +277,78 @@ function copyText(idInput) {
     }
 }
 
-
-
 function populateImageGrid(images, update = false) {
     const gridContainer = document.getElementById('imageGrid');
+    const fragment = document.createDocumentFragment();
+
     if (!update) gridContainer.innerHTML = '';
 
+    let loadedImagesCount = 0;
+
     images.forEach((image, index) => {
-        setTimeout(() => {
-            const container = document.createElement('div');
-            container.classList.add('image-container');
 
-            const imageElement = document.createElement('img');
-            imageElement.classList.add('aos-init');
-            imageElement.dataset.aos = 'fade-up';
-            imageElement.dataset.aosDelay = '0';
-            imageElement.src = image.image_links.thumbnail;
-            imageElement.alt = image.title;
+        const container = document.createElement('div');
+        container.classList.add('imageContainer');
 
-            const overlay = document.createElement('div');
-            overlay.classList.add('overlay');
+        console.log(image)
 
-            const title = document.createElement('h3');
-            title.textContent = image.title;
+        container.onclick = function(){
+            launchPopup("/dyna/image-viewer?db-image-id=" + image._id, 'pop-container')
+        }
 
-            const tag = document.createElement('span');
-            tag.classList.add('tag');
-            tag.innerHTML = '<i class="fas fa-paint-brush"></i>';
+        const imageElement = new Image();
+        imageElement.classList.add('aos-init');
+        imageElement.dataset.aos = 'fade-left';
+        imageElement.dataset.aosDelay = '0';
+        imageElement.alt = image.title;
 
-            overlay.appendChild(title);
-            if (image.is_artwork) overlay.appendChild(tag);
+        const overlay = document.createElement('div');
+        overlay.classList.add('overlay');
 
-            if (image.redirect_link) {
-                const link = document.createElement('a');
-                link.href = image.redirect_link;
-                link.appendChild(imageElement);
-                container.appendChild(link);
-            } else {
-                container.appendChild(imageElement);
+        const title = document.createElement('h3');
+        title.textContent = image.title;
+
+        const tag = document.createElement('span');
+        tag.classList.add('tag');
+        tag.innerHTML = '<i class="fas fa-paint-brush"></i>';
+
+        overlay.appendChild(title);
+        if (image.is_artwork) overlay.appendChild(tag);
+
+        if (image.redirect_link) {
+            const link = document.createElement('a');
+            link.href = image.redirect_link;
+            link.appendChild(imageElement);
+            container.appendChild(link);
+        } else {
+            container.appendChild(imageElement);
+        }
+
+        container.appendChild(overlay);
+
+        fragment.appendChild(container);
+
+        imageElement.onload = () => {
+            loadedImagesCount++;
+
+            if (loadedImagesCount === images.length) {
+                gridContainer.appendChild(fragment);
+
+                setTimeout(() => {
+                    gridContainer.querySelectorAll('.imageContainer').forEach(container => {
+                        container.querySelector('img').classList.add('active');
+                    });
+                }, 0);
+
+                const lastImageContainer = gridContainer.querySelector('.imageContainer:last-child');
+                if (lastImageContainer) {
+                    lockCheckScrollEnd = false;
+                    checkScrollEnd(selector = '#imageGrid .imageContainer:last-child');
+                }
             }
+        };
 
-            container.appendChild(overlay);
-
-            gridContainer.appendChild(container);
-
-            imageElement.classList.add('active');
-
-            if (index === images.length - 1){
-                lockCheckScrollEnd = false;
-                checkScrollEnd(selector = '#imageGrid .image-container:last-child');
-            }
-
-        }, index * 250);
+        imageElement.src = image.image_links.thumbnail;
     });
 }
 
@@ -338,12 +361,12 @@ function checkScrollEnd(selector) {
         const lastElement = document.querySelector(selector);
         if (lastElement) {
             const lastElementRect = lastElement.getBoundingClientRect();
-            if (lastElementRect.bottom <= window.innerHeight && !lockCheckScrollEnd) {
+            if (lastElementRect.bottom <= window.innerHeight + 256 && !lockCheckScrollEnd) {
                 fetchImages(true);
                 lockCheckScrollEnd = true;
             }
         }
-        requestId = null; // Limpa o requestId após a execução para evitar múltiplas execuções desnecessárias
+        requestId = null;
     }
 
     function requestCheckScrollEnd() {
@@ -354,11 +377,15 @@ function checkScrollEnd(selector) {
 
     window.addEventListener('scroll', requestCheckScrollEnd);
 
-    // Chama a função uma vez para verificar o estado inicial
     requestCheckScrollEnd();
 
-    // Retorna uma função para remover o event listener quando não for mais necessário
     return function () {
         window.removeEventListener('scroll', requestCheckScrollEnd);
     };
+}
+
+function launchPopup(url, popupId){
+    elementVisible(popupId, true, true);
+    addTemplate(url, popupId + "-content");
+    popupCallback = ['', {}];
 }
