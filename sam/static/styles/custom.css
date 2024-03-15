@@ -25,12 +25,13 @@ nav{
     padding-left: 36px;
     margin-bottom: 19px;
     cursor: pointer;
-    font-size: 16px;
+    
     user-select: none;
 }
 
 .checkbox-label > p{
-    translate: 0px 4px;
+    translate: 0px 2px;
+    font-size: 13pt;
 }
 
 .checkbox-label input {
@@ -83,8 +84,7 @@ nav{
 }
 
 .innerLabel{
-    margin-top: 12px;
-    margin-bottom: -12px;
+    
     width: 100%;
 }
 
@@ -93,23 +93,46 @@ nav{
     max-width: 80%;
     display: inline-block;
     position: relative;
-    bottom: 30px;
-    left: 16px;
-    font-weight: 600;
+    bottom: 58px;
+    left: 6px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 10pt;
+    font-size: 12pt;
+    padding: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: -32px;
 }
 .innerLabel > input:focus ~ span,
-.innerLabel > input:not(:placeholder-shown) ~ span{
-    bottom: 64px;
+.innerLabel > input:not(:placeholder-shown) ~ span,
+.innerLabel > input:focus ~ span *,
+.innerLabel > input:not(:placeholder-shown) ~ span *{
+    bottom: 94px;
     left: 0px;
-    max-width: 100%;
-}.innerLabel > input:not(:placeholder-shown), textarea:not(:placeholder-shown){
-    border-color: var(--theme-color);
-    background-color: var(--theme-color-trans);
+    max-width: calc(100% - 8px);
+    background-color: var(--theme-color);
+    color: var(--light-color);
     
+
+}.innerLabel > input:not(:placeholder-shown), .innerLabel > input:focus{
+    border-color: var(--theme-color);
+    border-top-left-radius: 0px;
+    margin-top: 16px;
+}
+
+textarea:not(:placeholder-shown){
+    border-color: var(--theme-color);
+}
+
+.innerLabel > span > i{
+    margin-right: 8px;
+}
+
+form h2{
+    margin-bottom: 16px;
 }
 
 .successBorder{

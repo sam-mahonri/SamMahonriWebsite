@@ -16,3 +16,4 @@ class Errors(Enum):
     FILE_PROBLEM = lazy_gettext("Ocorreu um erro ao salvar o arquivo")
     DB_SAVE_PROBLEM = lazy_gettext("Ocorreu um erro ao indexar o item no banco de dados")
     NO_IMAGES_FOUND = lazy_gettext("Sem mais imagens encontradas")
+    NO_CHANGES = lazy_gettext("Nenhuma alteração feita")

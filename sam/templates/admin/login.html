@@ -14,11 +14,11 @@
         <div class="flex hv100 wp100 justifyCenter alignStartCenter paddingLarge borderBox columnFlex minusTopNav backFixed">
             
 
-            <div class="flex columnFlex justifyStart alignStartCenter">
+            <div class="flex columnFlex justifyStart alignStartCenter wp100 maxWpx600">
                 <span class="navComp onlyMobile"></span>
                 <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Entrar') }}</h1>
                 <hr>
-                <form method="POST" action="{{ url_for('auth.login') }}" id="login-form" class="flex columnFlex form alignStart extraMargin">
+                <form method="POST" action="{{ url_for('auth.login') }}" id="login-form" class="flex columnFlex form alignStart extraMargin " onsubmit="submitForm(event, this, 'loginSuccess', null, DEF.LOGGING_IN)">
                     {{ form.csrf_token }}
                     {{ render_field(form.username) }}
                     {{ render_field(form.password) }}

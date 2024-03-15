@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
 :root {
     /* Cores Gerais */
@@ -26,9 +26,9 @@
     --primary-bt-text-size: 9pt;
 
     /* Fontes */
-    --font-family-logo: 'Raleway', sans-serif;
+    --font-family-logo: 'Lexend', sans-serif;
     --font-family-primary: 'Unbounded', sans-serif;
-    --font-family-secondary: 'Raleway', sans-serif;
+    --font-family-secondary: 'Lexend', sans-serif;
 
     /* Espaçamentos */
     --padding-small: 12px;
@@ -38,6 +38,7 @@
     --margin-small: 8px;
     --margin-medium: 16px;
     --margin-large: 24px;
+    --padding-panel: 24px;
 
     /* Gaps */
     --gap-small: 8px;

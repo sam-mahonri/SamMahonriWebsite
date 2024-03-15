@@ -23,11 +23,13 @@ h1 {
 }
 
 .tag {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-family-secondary);
     font-size: var(--primary-bt-text-size);
-    padding: 4px 8px 4px 8px;
+    font-weight: 700;
+    padding: 4px 10px 4px 10px;
     border-radius: var(--border-2-radius);
     width: fit-content;
+    text-transform: uppercase;
 }
 
 .backRed {
@@ -85,6 +87,11 @@ textarea {
     font-size: var(--p-text-size);
     font-family: var(--font-family-secondary);
     color: var(--current-text-color);
+    font-weight: 300;
+}
+
+span{
+    font-weight: 300;
 }
 
 .slider {
@@ -177,18 +184,17 @@ textarea {
 input,
 textarea {
     outline-style: none;
-    box-sizing: border-box;
+
     border-radius: var(--border-3-radius);
     padding: var(--padding-small);
     background-color: var(--neutral-color);
-    border: solid 1px var(--neutral-color);
+    border: solid 2px transparent;
     min-width: 16px;
 }
 
 input:focus,
 textarea:focus {
     border-color: var(--theme-color);
-    background-color: var(--theme-color-trans);
 }
 
 input[type=file] {
@@ -199,7 +205,7 @@ input[type=file]::file-selector-button {
     font-family: var(--font-family-secondary);
     margin-right: 16px;
     border: none;
-    background-color: var(--theme-color);
+    background-color: var(--theme-color-trans);
     padding: var(--padding-small);
     color: var(--light-color);
     cursor: pointer;
@@ -207,7 +213,8 @@ input[type=file]::file-selector-button {
 }
 
 input[type=file]::file-selector-button:hover {
-    background-color: var(--theme-color-trans);
+    
+    background-color: var(--theme-color);
 }
 
 textarea {
@@ -378,10 +385,14 @@ section {
     z-index: 4;
     flex-direction: column;
     align-items: center;
-    backdrop-filter: blur(4px);
+    
     
 }.popDialog > section{
     padding: var(--padding-large);
+}
+
+.blurBack{
+    backdrop-filter: blur(4px);
 }
 
 nav {
@@ -469,6 +480,10 @@ nav *{
     width: 100%;
 }
 
+.maxWpx600{
+    max-width: 600px;
+}
+
 .forceWp100{
     max-width: 100% !important;
 }
@@ -541,14 +556,19 @@ nav *{
     justify-content: center;
     align-items: start;
     flex-direction: column;
-    background-color: var(--sec-dark);
-    padding: var(--padding-medium);
+    background-color: var(--current-back-color);
+    padding: var(--padding-panel);
     border-radius: var(--border-2-radius);
     border: solid 1px var(--neutral-color);
     gap: var(--gap-small);
-    min-width: 128px;
-    box-sizing: border-box;
+    min-width: 200px;
     overflow: hidden;
+    box-shadow: 0px 4px 32px var(--neutral-dark);
+}
+
+.dangerForm{
+    border-color: var(--error-color) !important;
+    box-shadow: 0 4px 32px var(--error-color) !important;
 }
 
 hr {
@@ -580,11 +600,13 @@ hr {
 .flashMessage {
     border-radius: var(--border-2-radius);
     padding: var(--padding-medium);
-    font-family: var(--font-family-secondary);
+    font-family: var(--font-family-primary);
     color: var(--light-color);
     width: fit-content;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .successFlash::before {
@@ -637,6 +659,8 @@ hr {
     height: 48px;
     width: 48px;
 }
+
+
 
 .plainButton {
     text-transform: uppercase;
@@ -740,6 +764,10 @@ hr {
     box-sizing: border-box;
 }
 
+.ignoreBorderBox {
+    box-sizing: content-box !important;
+}
+
 .selfAlignStart {
     align-self: flex-start;
 }
@@ -804,11 +832,12 @@ footer {
 
 .imagePlaceholder {
     border-radius: var(--border-3-radius);
-    width: 100%;
+    max-width: fit-content;
+    overflow: hidden;
+    margin: 0 auto;
     flex: 1;
     background-color: var(--neutral-color);
     border: solid 1px var(--neutral-color);
-    overflow: hidden;
     object-fit: cover;
     display: flex;
     justify-content: center;
@@ -817,12 +846,18 @@ footer {
 }
 
 .imagePlaceholder>img {
-    margin: 0;
     max-width: 100%;
     width: 100%;
-    height: 100%;
+
+    flex: 1;
     object-fit: contain;
     z-index: 2;
+}
+
+.imagePlaceholderSmall{
+    max-height: calc(100vh - 200px);
+}.imagePlaceholderSmall > img{
+    max-height: calc(100vh - 276px);
 }
 
 .imagePlaceholder>p {
@@ -862,7 +897,7 @@ footer {
 }
 
 .gridContainer img {
-    
+    transition: scale var(--transition-duration) ease-in-out;
     min-width: 360px;
     flex: 1;
     height: 50vh;

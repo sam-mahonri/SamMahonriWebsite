@@ -6,3 +6,5 @@ class Success(Enum):
     SUCCESS_SAVED = lazy_gettext('Salvo com êxito!')
     SUCCESS_UPLOAD = lazy_gettext('Arquivo enviado com êxito!')
     SUCCESS_LOADED = lazy_gettext('Carregado com êxito!')
+    SUCCESS_WELCOME = lazy_gettext('Bem-vindo!')
+    SUCCESS_DELETED = lazy_gettext('Item excluído com êxito!')

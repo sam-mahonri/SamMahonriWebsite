@@ -17,11 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    window.addEventListener('popstate', function (event) {
-        // Recarrega a página quando o usuário navega de volta
-        location.reload();
-    });
-
     window.addEventListener('scroll', verificaScroll);
 
     verificaScroll();
@@ -193,7 +188,7 @@ function showLinkToCopy(LinkCopyId, link) {
 }
 
 
-// [obsoleto] AVISO: Este script executa todos os scripts de uma página recém modificada em um innerHTML(exemplo), tenha certeza que todos os elementos do HTML Jinja2 esteja livre de códigos maliciosos para evitar ataques XSS
+// [obsoleto] AVISO: Este script executa todos os scripts de uma página recém modificada em um innerHTML(exemplo), tenho certeza que todos os elementos do HTML Jinja2 estão livres de códigos maliciosos para evitar ataques XSS
 function setInnerHTML(elm, html) {
     elm.innerHTML = html;
 
@@ -225,7 +220,8 @@ window.addEventListener('beforeunload', function(event) {
     placeholderLoading('nav-loading');
 });
 
-async function changePage(c_page, r_page = null, self_link = null) { // [obsoleto] Atualiza o conteúdo da página sem carregá-la novamente
+// [obsoleto] Atualiza o conteúdo da página sem carregá-la novamente
+async function changePage(c_page, r_page = null, self_link = null) { 
     if (!r_page) r_page = c_page.replace("c/", "");
 
     placeholderLoading('nav-loading')
@@ -284,22 +280,23 @@ function populateImageGrid(images, update = false) {
     if (!update) gridContainer.innerHTML = '';
 
     let loadedImagesCount = 0;
+    let indexCounter = 0;
 
     images.forEach((image, index) => {
-
+        indexCounter++;
         const container = document.createElement('div');
         container.classList.add('imageContainer');
 
         console.log(image)
 
         container.onclick = function(){
-            launchPopup("/dyna/image-viewer?db-image-id=" + image._id, 'pop-container')
+            launchPopup("/macro/image-viewer?db-image-id=" + image._id, 'pop-container')
         }
 
         const imageElement = new Image();
         imageElement.classList.add('aos-init');
-        imageElement.dataset.aos = 'fade-left';
-        imageElement.dataset.aosDelay = '0';
+        imageElement.dataset.aos = 'zoom-out';
+        imageElement.dataset.aosDelay = String(indexCounter * 200);
         imageElement.alt = image.title;
 
         const overlay = document.createElement('div');
@@ -315,15 +312,8 @@ function populateImageGrid(images, update = false) {
         overlay.appendChild(title);
         if (image.is_artwork) overlay.appendChild(tag);
 
-        if (image.redirect_link) {
-            const link = document.createElement('a');
-            link.href = image.redirect_link;
-            link.appendChild(imageElement);
-            container.appendChild(link);
-        } else {
-            container.appendChild(imageElement);
-        }
 
+        container.appendChild(imageElement);
         container.appendChild(overlay);
 
         fragment.appendChild(container);
@@ -385,7 +375,8 @@ function checkScrollEnd(selector) {
 }
 
 function launchPopup(url, popupId){
-    elementVisible(popupId, true, true);
+    elementVisible(popupId, true, false);
     addTemplate(url, popupId + "-content");
     popupCallback = ['', {}];
+    
 }

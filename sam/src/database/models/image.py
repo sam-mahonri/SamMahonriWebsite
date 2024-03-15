@@ -1,6 +1,7 @@
 from .... import mongo_client
 from datetime import datetime
 from bson import ObjectId
+from ..universal import delete_file
 
 class Gallery:
     collection = mongo_client.get_database().gallery
@@ -38,7 +39,7 @@ class Gallery:
     def find(cls, page=1, per_page=9, is_artwork=None, title=None):
         filter_query = {}
         if is_artwork is not None:
-            filter_query['is_artwork'] = is_artwork
+            filter_query['is_artwork'] = bool(is_artwork)
         if title:
             filter_query['title'] = {'$regex': title, '$options': 'i'}
         skip = (page - 1) * per_page
@@ -58,5 +59,19 @@ class Gallery:
     
     @classmethod
     def delete(cls, image_id):
-        result = cls.collection.delete_one({'_id': ObjectId(image_id)})
-        return result.deleted_count > 0
+        
+        image = cls.collection.find_one({'_id': ObjectId(image_id)})
+        result = {"deleted_count": 0}
+        fully_deleted = False
+        try:
+            if image:
+                errors = 0
+                for i in image['image_links'].keys():
+                    if not delete_file.delete_fileurl(image['image_links'][i]): errors += 1
+                if not errors > 2: 
+                    result = cls.collection.delete_one({'_id': ObjectId(image_id)})
+                    fully_deleted = result.deleted_count > 0
+        except:
+            pass
+        
+        return image and fully_deleted

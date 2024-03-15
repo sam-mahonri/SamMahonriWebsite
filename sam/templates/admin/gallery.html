@@ -19,7 +19,7 @@
                     <span class="navComp"></span>
                     <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Galeria de imagens') }}</h1>
                     <hr>
-                    <button class="primaryButton wpFit alignStartCenter" id="bt-open-upload-dialog" onclick="launchPopup('/dyna/upload_image?callback=self&id=auto-image-uploader', 'pop-container');"><i class="fa-solid fa-image"></i>{{ _('Nova imagem') }}</button>
+                    <button class="primaryButton wpFit" id="bt-open-upload-dialog" onclick="launchPopup('/macro/upload_image?callback=self&id=auto-image-uploader', 'pop-container');"><i class="fa-solid fa-image"></i>{{ _('Nova imagem') }}</button>
                 </div>
             </div>
     </section>
@@ -28,6 +28,13 @@
     <section>
         <div class="flex hv100 wp100 alignStartCenter paddingLarge borderBox columnFlex minusTopNav backFixed">
             <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium">
+                <div class="flex gridFlex alignStartCenter">
+                    <label class="checkbox-label">
+                        <p>{{ _('Apenas artes') }}</p>
+                        <input type="checkbox" id="filter-only-arts" onchange="fetchImages(false, this.checked)">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
                 <div id="imageGrid" class="gridContainer"></div>
                 <script>
                     setTimeout(() => {

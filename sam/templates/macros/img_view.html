@@ -1,31 +1,51 @@
-{% macro render_img_view(id="generic-img-view", message=_("Visualização"), image_link="", created_at=None, updated_at=None) %}
-<div class="imagePlaceholder">
+{% macro render_img_view(id="generic-img-view", message=_("Visualização"), image_link="", created_at=None,
+updated_at=None) %}
+<div class="imagePlaceholder imagePlaceholderSmall" id="{{ id + '-place' }}">
     {% if message|length > 0 %}
-        <p>
-            {{ message }}
-        </p>
+    <p class="flex rowFlex gapMedium alignCenter justifyCenter">
+        {{ message }}
+        <a onclick="this.parentNode.parentNode.classList.toggle('imagePlaceholderSmall')"
+            title="{{ _('Preencher seção') }}">
+            <i class="fa-solid fa-maximize"></i>
+        </a>
+    </p>
     {% endif %}
-    {% if image_link != "" %}
-    <div id="{{ id }}_loader" class="wp100 hv40 flex alignCenter justifyCenter">{% include 'components/loading_spinner.html' %}</div>
-    {% endif %}
-    <img src="{{ image_link }}" id="{{ id }}" class="{{ 'hideElement' if image_link == '' else ''}}" onload="document.getElementById('{{ id }}_loader').style.display = 'none';">
-    
+
+    <div id="{{ id }}_loader"
+        class="wp100 extraMargin flex alignCenter justifyCenter {{ 'hideElement' if not image_link != '' else ''}}">{%
+        include 'components/loading_spinner.html' %}</div>
+    <img src="{{ image_link }}" id="{{ id }}" class="hideElement {{ 'hideElement' if image_link == '' else ''}}"
+        onload="document.getElementById('{{ id }}_loader').classList.add('hideElement'); this.classList.remove('hideElement')">
     {% if created_at %}
-        <p>
-            <i class="fa-solid fa-calendar-days"></i>
-            {% set formatted_datetime = created_at.strftime("%d &bull; %m &bull; %Y %H:%M:%S") %}
-            {{ formatted_datetime | safe }}
-        </p>
-    {% endif %}
-    {% if updated_at and created_at != updated_at %}
-        <p>
-            <i class="fa-solid fa-rotate"></i>
-            {% set formatted_datetime = updated_at.strftime("%d &bull; %m &bull; %Y %H:%M:%S") %}
-            {{ formatted_datetime | safe }}
-        </p>
+    <p>
+        <i class="fa-solid fa-calendar-days"></i>
+        {{ format_relative_time(created_at) }}
+        {% if updated_at and created_at != updated_at %}
+        -
+        <i class="fa-solid fa-rotate"></i>
+        {{ format_relative_time(updated_at) }}
+
+        {% endif %}
+    </p>
     {% endif %}
 </div>
 {% endmacro %}
 
-{% macro render_image_actions(id="generic-image-actions", redirect_link="", download=false, edit_api_link="") %}
+{% macro render_image_actions(id="generic-image-actions", redirect_link="", download=true, edit_api_link="",
+delete_api_link="", image_link="") %}
+<div class="wpFit alignCenterSelf flex gridFlex gapSmall">
+    {% if redirect_link != "" %}<a href="{{ redirect_link }}" target="_blank" title="{{ _('Engaje') }}"><button
+            class="selectorButton"><i class="fa-solid fa-heart"></i></button></a>{% endif %}
+    {% if download %}<a href="{{ image_link }}" title="{{ _('Fazer download') }}" download="{{ image_link }}"><button
+            class="selectorButton"><i class="fa-solid fa-cloud-arrow-down"></i></button></a>{% endif %}
+    {% if session["user"] %}
+    <button class="selectorButton" title="{{ _('Editar dados da imagem') }}"
+        onclick="launchPopup('/macro/edit_image?callback=closeReloadSelf&id=' + '{{ id }}', 'pop-container-2');"><i
+            class="fa-solid fa-pen-to-square"></i></button>
+    <button class="selectorButton" title="{{ _('Excluir imagem') }}"
+        onclick="launchPopup('/macro/delete-item?callback=closePops&item-id=' + '{{ id }}' + '&route=/api/gallery/image', 'pop-container-2');">
+        <i class="fa-solid fa-trash-can"></i></button>
+
+    {% endif %}
+</div>
 {% endmacro %}

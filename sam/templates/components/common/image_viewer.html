@@ -1,2 +1,5 @@
-{% from "macros/img_view.html" import render_img_view %}
-{{ render_img_view(id = id, message = message, image_link = url, created_at=created_at, updated_at=updated_at) }}
+{% from "macros/img_view.html" import render_img_view, render_image_actions %}
+<div class="hp100 wp100 flex columnFlex alignCenter justifyCenter gapSmall">
+    {{ render_image_actions(id = id, redirect_link = redirect_link, image_link = url) }}
+    {{ render_img_view(id = id, message = message, image_link = url, created_at=created_at, updated_at=updated_at) }}
+</div>

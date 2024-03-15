@@ -8,6 +8,7 @@ from pymongo import MongoClient
 from flask_jwt_extended import JWTManager, exceptions
 from flask_wtf.csrf import CSRFProtect
 from .src.enums import errors as Err
+from .src.utils import aproximate
 
 app = Flask(__name__)
 
@@ -40,11 +41,13 @@ def get_locale():
     
     return locale_session
 
-babel = Babel(app, locale_selector=get_locale)
+babel = Babel(app, locale_selector = get_locale)
 
 @app.context_processor
 def inject_in_template():
     return dict(current_language = get_locale())
+
+app.jinja_env.globals.update(format_relative_time=aproximate.format_relative_time)
 
 #@app.errorhandler(Exception)
 #def handle_error(error):
@@ -73,13 +76,13 @@ def create_app():
     from .src.admin.views import admin_bp
     from .src.auth.views import auth_bp
     from .src.api.routes import api_bp
-    from .src.dyna.views import dyna_bp
+    from .src.macro.views import macro_bp
     
     app.register_blueprint(public_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(api_bp)
-    app.register_blueprint(dyna_bp)
+    app.register_blueprint(macro_bp)
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
     
     return app

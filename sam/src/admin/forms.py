@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FloatField, ValidationError, EmailField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField, FloatField, ValidationError, EmailField, IntegerField, HiddenField
 from wtforms.validators import DataRequired, Length, EqualTo, InputRequired, NumberRange, Optional, URL
 from flask_babel import gettext, _, lazy_gettext
 
@@ -42,8 +42,18 @@ class PostForm(FlaskForm):
     tags = StringField(lazy_gettext('Tags (separadas por vírgula)'), validators=[Optional()])
     content = TextAreaField(lazy_gettext('Conteúdo'), validators=[InputRequired(), Length(min=3, max=10000)])
 
-class GalleryForm(FlaskForm):
+class BaseGalleryForm(FlaskForm):
     title = StringField(lazy_gettext('Nome da imagem'), validators=[InputRequired(), Length(max=20)])
     is_artwork = BooleanField(lazy_gettext('Listar na galeria de artes'))
     redirect_link = StringField(lazy_gettext('Link alternativo (Ex.: Postagem em rede social)'), validators=[Optional(), URL()])
+
+class GalleryForm(BaseGalleryForm):
     image = FileField(lazy_gettext('Arquivo de imagem'), validators=[InputRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'gif'], lazy_gettext('Apenas imagens do tipo .jpg, .png, .gif e .jpeg!'))])
+
+class GalleryEditForm(BaseGalleryForm):
+    image_id = HiddenField(validators=[InputRequired()])
+    pass
+
+class DeleteItem(FlaskForm):
+    item_id = HiddenField(validators=[InputRequired()])
+    please_delete = BooleanField(lazy_gettext('Excluir item?'))

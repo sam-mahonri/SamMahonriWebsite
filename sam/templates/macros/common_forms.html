@@ -2,10 +2,10 @@
 {% from "macros/form_input.html" import render_field, render_copy_field %}
 {% from "macros/img_view.html" import render_img_view %}
 
-    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
+    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter alignCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
         <form method="POST" action="{{ api_link }}" id="{{ id }}"
-            class="flex columnFlex form alignStart flexExpand hpFit"
-            onsubmit="submitForm(event, this, '{{ callback }}', id)">
+            class="flex columnFlex form alignStart flexExpand hpFit panel"
+            onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}')">
             {{ form.csrf_token }}
             {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
             <h2>{{_('Publicar imagem')}}</h2>
@@ -15,7 +15,7 @@
             {{ render_field(form.redirect_link) }}
             {{ render_field(form.is_artwork) }}
             <hr>
-            <button type="submit" class="primaryButton alignEndSelf" onclick="popupCallback = ['refreshImgs', {}]"><i class="fa-solid fa-upload"></i>{{ _('Publicar') }}</button>
+            <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-upload"></i>{{ _('Publicar') }}</button>
         </form>
 
         <div class="flex flexExpand columnFlex wp100 hp100 gapSmall">
@@ -29,4 +29,43 @@
         </div>
     </div>
 
+{% endmacro %}
+
+{% macro render_image_edit_form(form, api_link='/api/gallery/image', callback="", id="image-edit") %}
+{% from "macros/form_input.html" import render_field, render_copy_field %}
+{% from "macros/img_view.html" import render_img_view %}
+
+    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter alignCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
+        <form action="{{ api_link }}" id="{{ id + '-edit-form' }}"
+            class="flex columnFlex form alignStart flexExpand hpFit panel maxWpx600"
+            onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}', c_method='put')">
+            {{ form.csrf_token }}
+            {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
+            <h2>{{_('Editar dados da imagem')}}</h2>
+            {{ form.image_id }}
+            {{ render_field(form.title) }}
+            {{ render_field(form.redirect_link) }}
+            {{ render_field(form.is_artwork) }}
+            <hr>
+            <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-floppy-disk"></i>{{ _('Salvar') }}</button>
+        </form>
+    </div>
+
+{% endmacro %}
+
+{% macro render_delete_form(form, callback="", id="delete-item", route = "") %}
+{% from "macros/form_input.html" import render_field %}
+<div class="wp100 flex rowFlexColumn gapMedium justifyCenter alignCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
+    <form action="{{ route }}" id="{{ id + '-form' }}"
+        class="flex columnFlex form alignStart flexExpand hpFit panel maxWpx600 dangerForm"
+        onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}', c_method='delete')">
+        {{ form.csrf_token }}
+        {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
+        <h2>{{_('Deseja realmente excluir este item?')}}</h2>
+        {{ form.item_id }}
+        {{ render_field(form.please_delete) }}
+        <hr>
+        <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-fire"></i>{{ _('Excluir') }}</button>
+    </form>
+</div>
 {% endmacro %}

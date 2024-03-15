@@ -14,6 +14,10 @@ def home():
     Statistics.update('accesses')
     return render_template('public/index.html')
 
+@public_bp.route("/arts")
+def arts(): 
+    return render_template('public/gallery.html')
+
 @public_bp.route("/favicon.ico")
 def favicon(): return send_file('static/favicon.svg')
 
@@ -21,5 +25,4 @@ def favicon(): return send_file('static/favicon.svg')
 def get_image(img):
 
     path = app.config.get('UPLOAD_PATH', '/static/files')
-
     return send_from_directory(path, img)

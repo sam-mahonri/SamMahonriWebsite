@@ -12,7 +12,7 @@ from flask_jwt_extended import (
     set_access_cookies, unset_jwt_cookies, get_jwt
 )
 from ... import jwt, limiter
-from ..api.admin import general_settings_w, general_settings_r
+from ..api.routes import general_settings_w, general_settings_r
 from ..auth import refresh_expiring_jwts
 
 from datetime import timedelta, timezone, datetime

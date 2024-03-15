@@ -7,54 +7,77 @@ async function handleRequestErrors(response) {
                 throw new Error(ERR.ACCESS_DENIED);
             case 401:
                 throw new Error(ERR.UNAUTHORIZED);
+            case 429:
+                throw new Error(ERR.TOO_MANY_REQUESTS);
+            case 500:
+                throw new Error(ERR.INTERNAL_SERVER_ERROR);
             default:
                 throw new Error(ERR.REQUEST_ERROR);
         }
     }
 }
 
-async function submitForm(event, form, callback = null) {
-    
-    event.preventDefault();
-    placeholderLoading('nav-loading')
-    const loadingFlash = showFlashMessage(DEF.PROCESSING, 'loadingFlash', 0);
-    form.classList.add('disabled');
-    form.classList.add('disableInputEvents');
+function disabledForm(form, disabled = true){
+    var elementosFormulario = form.elements;
 
-    const formData = new FormData(form);
-    const url = form.action;
-    const method = form.method;
-
-    var req_data
-
-    try {
-        const response = await fetch(url, {
-            method: method,
-            body: formData,
-        });
-
-        await handleRequestErrors(response);
-
-        req_data = await response.json();
-        console.log('Resposta do servidor:', req_data.message);
-        showFlashMessage(req_data.message, req_data.success ? 'successFlash' : 'errorFlash');
-        resetErrorMessages(req_data.data.form_fields, req_data.data.form_errors);
-        if (callback && typeof callback === 'string' && req_data.success) {
-            executeCallbacks(callback, form.id, req_data)
-        }
-    } catch (error) {
-        showFlashMessage(error.message, 'errorFlash');
-        return error.status;
-    } finally {
-        setTimeout(() => {
-            form.classList.remove('disabled');
-            form.classList.remove('disableInputEvents');
-            smoothErrorElement(loadingFlash, 250);
-            placeholderLoading('nav-loading', false)
-        }, 500);
+    for (var i = 0; i < elementosFormulario.length; i++) {
+        elementosFormulario[i].disabled = disabled;
     }
-    
 }
+
+async function submitForm(event, form, callback = null, c_method=null, loading_msg=DEF.PROCESSING) {
+    console.log(c_method)
+    event.preventDefault();
+    if (!form.classList.contains('disabled')) {
+        placeholderLoading('nav-loading');
+        const loadingFlash = showFlashMessage(loading_msg, 'loadingFlash', 0);
+        form.classList.add('disabled');
+        form.classList.add('disableInputEvents');
+
+        const formData = new FormData(form);
+        const url = form.action;
+        const method = c_method ? c_method : form.method;
+
+        console.log(method)
+
+        try {
+            const response = await fetch(url, {
+                method: method,
+                body: formData,
+                credentials: 'same-origin'
+            });
+
+            await handleRequestErrors(response);
+
+            const req_data = await response.json();
+  
+            showFlashMessage(req_data.message, req_data.success ? 'successFlash' : 'errorFlash');
+            resetErrorMessages(req_data.data.form_fields, req_data.data.form_errors);
+
+            const cookies = response.headers.get('Set-Cookie');
+            if (cookies) {
+                document.cookie = cookies;
+
+            }
+
+            if (callback && typeof callback === 'string' && req_data.success) {
+                executeCallbacks(callback, form.id, req_data)
+            }
+        } catch (error) {
+            console.error(error.message)
+            showFlashMessage(error.message, 'errorFlash');
+            return error.status;
+        } finally {
+            setTimeout(() => {
+                form.classList.remove('disabled');
+                form.classList.remove('disableInputEvents');
+                smoothErrorElement(loadingFlash, 250);
+                placeholderLoading('nav-loading', false);
+            }, 500);
+        }
+    }
+}
+
 
 async function addTemplate(urlRota, elementoId, executarScripts = false, showLoading = true) {
     const elemento = document.getElementById(elementoId);
@@ -68,8 +91,8 @@ async function addTemplate(urlRota, elementoId, executarScripts = false, showLoa
 
         setTimeout(() => {
             switch (response.status){
-                case 401: location.reload()
-                case 403: location.reload()
+                case 401: location.reload(); break;
+                case 403: location.reload(); break;
             }
         }, 2000);
         
@@ -95,26 +118,37 @@ async function addTemplate(urlRota, elementoId, executarScripts = false, showLoa
 
 function executeCallbacks(callback = "self" , target, data){
     switch (callback){
-        case "self": resetAndShowImageLink(target, data);
+        case "self": resetAndShowImageLink(target, data); break;
+        case "closeReloadSelf": closeReloadSelf(target, data); break;
+        case "loginSuccess": window.location = "/admin"; break;
+        case "closePops": closePopsAndReload();
     }
 }
 
-// Função para povoar a grade de imagens
-
 var pageImage = 1
-// Função para obter as imagens da API e povoar a grade de imagens
-async function fetchImages(nextPage = false) {
+var onlyArts = false
+var currentQuery = ""
+async function fetchImages(nextPage = false, only_arts = onlyArts, query = currentQuery) {
+
+    onlyArts = only_arts;
+    currentQuery = query;
+
     placeholderLoading('nav-loading');
     if(nextPage) pageImage++;
     else pageImage = 1;
 
-    await fetch('/api/gallery/list' + "?page=" + String(pageImage))
+    let fetchURL = "/api/gallery/list" + "?page=" + String(pageImage) + (only_arts ? "&is_artwork=True" : "") + (query != "" ? "&query=" + query : "")
+
+    await fetch(fetchURL)
     .then(response => response.json())
     .then(data => {
         if (data.success) {
             populateImageGrid(data.data.images, nextPage ? true : false);
         } else {
-            showFlashMessage(data.message, "warningFlash")
+            setTimeout(() => {
+                if (!nextPage) document.getElementById('imageGrid').innerHTML = "";
+            }, 100);
+            showFlashMessage(data.message, "warningFlash");
         }
     })
     .catch(error => {
@@ -124,6 +158,4 @@ async function fetchImages(nextPage = false) {
     setTimeout(() => {
         placeholderLoading('nav-loading', false)
     }, 500);
-
-    //smoothErrorElement(loadingFlash, 250);
 }
