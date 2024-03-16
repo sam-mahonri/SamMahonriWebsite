@@ -32,13 +32,18 @@ updated_at=None) %}
 {% endmacro %}
 
 {% macro render_image_actions(id="generic-image-actions", redirect_link="", download=true, edit_api_link="",
-delete_api_link="", image_link="") %}
+delete_api_link="", image_urls="") %}
 <div class="wpFit alignCenterSelf flex gridFlex gapSmall">
     {% if redirect_link != "" %}<a href="{{ redirect_link }}" target="_blank" title="{{ _('Engaje') }}"><button
             class="selectorButton"><i class="fa-solid fa-heart"></i></button></a>{% endif %}
-    {% if download %}<a href="{{ image_link }}" title="{{ _('Fazer download') }}" download="{{ image_link }}"><button
+    {% if download %}<a href="{{ image_link }}" title="{{ _('Fazer download') }}" download="{{ image_urls.original }}"><button
             class="selectorButton"><i class="fa-solid fa-cloud-arrow-down"></i></button></a>{% endif %}
+    <a title="{{ _('Copiar link direto') }}"><button
+            class="selectorButton" onclick="copyText(null, '{{ image_urls.original }}')"><i class="fa-solid fa-link"></i></button></a>
     {% if session["user"] %}
+    <a title="{{ _('Copiar link da miniatura') }}"><button
+        class="selectorButton" onclick="copyText(null, '{{ image_urls.thumbnail }}')"><i class="fa-solid fa-mountain-sun"></i></button></a>
+    
     <button class="selectorButton" title="{{ _('Editar dados da imagem') }}"
         onclick="launchPopup('/macro/edit_image?callback=closeReloadSelf&id=' + '{{ id }}', 'pop-container-2');"><i
             class="fa-solid fa-pen-to-square"></i></button>

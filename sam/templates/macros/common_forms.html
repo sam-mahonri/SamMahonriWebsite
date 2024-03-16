@@ -40,7 +40,6 @@
             class="flex columnFlex form alignStart flexExpand hpFit panel maxWpx600"
             onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}', c_method='put')">
             {{ form.csrf_token }}
-            {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
             <h2>{{_('Editar dados da imagem')}}</h2>
             {{ form.image_id }}
             {{ render_field(form.title) }}
@@ -60,12 +59,52 @@
         class="flex columnFlex form alignStart flexExpand hpFit panel maxWpx600 dangerForm"
         onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}', c_method='delete')">
         {{ form.csrf_token }}
-        {% if form.errors %} <script>scrollToSection('init-main')</script> {% endif %}
         <h2>{{_('Deseja realmente excluir este item?')}}</h2>
         {{ form.item_id }}
-        {{ render_field(form.please_delete) }}
+        {{ render_field(form.please_delete, onchange="toggleBtSubmit(this.checked, '" + id + "');") }}
         <hr>
-        <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-fire"></i>{{ _('Excluir') }}</button>
+        <button type="submit" class="primaryButton alignEndSelf disabled" id="{{ id + '-bt-submit' }}"><i class="fa-solid fa-fire"></i>{{ _('Excluir') }}</button>
     </form>
 </div>
+{% endmacro %}
+
+{% macro render_new_modality(form, api_link='/api/commissions/modality', callback="reloadModalities", id="new-comm-modality") %}
+{% from "macros/form_input.html" import render_field, render_copy_field %}
+
+    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter alignCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
+        <form action="{{ api_link }}" method="post" id="{{ id }}"
+            class="flex columnFlex form alignStart flexExpand hpFit panel maxWpx600"
+            onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}')">
+            {{ form.csrf_token }}
+            <h2>{{_('Criar modalidade')}}</h2>
+            {{ render_field(form.title) }}
+            {{ render_field(form.description) }}
+            {{ render_field(form.type_value) }}
+            {{ render_field(form.image_link) }}
+            <hr>
+            <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-square-plus"></i>{{ _('Criar') }}</button>
+        </form>
+    </div>
+
+{% endmacro %}
+
+{% macro render_edit_modality(form, api_link='/api/commissions/modality', callback="reloadKeepModalities", id="edit-comm-modality") %}
+{% from "macros/form_input.html" import render_field, render_copy_field %}
+
+    <div class="wp100 flex rowFlexColumn gapMedium justifyCenter alignCenter hpFit aos-init" data-aos="fade-up" data-aos-delay="0">
+        <form action="{{ api_link }}" id="{{ id }}"
+            class="flex columnFlex form alignStart flexExpand hpFit panel maxWpx600"
+            onsubmit="submitForm(event = event, form = this, callback = '{{ callback }}', c_method='put')">
+            {{ form.csrf_token }}
+            <h2>{{_('Editar modalidade')}}</h2>
+            {{ form.slug }}
+            {{ render_field(form.title) }}
+            {{ render_field(form.description) }}
+            {{ render_field(form.type_value) }}
+            {{ render_field(form.image_link) }}
+            <hr>
+            <button type="submit" class="primaryButton alignEndSelf"><i class="fa-solid fa-floppy-disk"></i>{{ _('Salvar') }}</button>
+        </form>
+    </div>
+
 {% endmacro %}

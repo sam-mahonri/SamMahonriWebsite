@@ -2,411 +2,412 @@
 # Copyright (C) 2024 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-15 20:43-0300\n"
-"PO-Revision-Date: 2024-03-15 21:17-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
-"Language: en_US\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: PO File Editor https://pofile.net/free-po-editor\n"
 
 #: index.html:8 sam/templates/public/index.html:30
 msgid "Olá!"
-msgstr "Hello!"
+msgstr ""
 
 #: index.html:9 sam/templates/public/index.html:32
 msgid "Eu sou"
-msgstr "I am"
+msgstr ""
 
 #: sam/src/admin/forms.py:14
 msgid "Valor real não válido"
-msgstr "Not a valid float number"
+msgstr ""
 
 #: sam/src/admin/forms.py:19
 msgid "Título do aviso"
-msgstr "Warning title"
+msgstr ""
 
 #: sam/src/admin/forms.py:20
 msgid "Descrição do aviso"
-msgstr "Warning Description"
+msgstr ""
 
 #: sam/src/admin/forms.py:21
 msgid "Mostrar aviso"
-msgstr "Show warning"
+msgstr ""
 
 #: sam/src/admin/forms.py:22 sam/src/admin/forms.py:45
 msgid "Link da imagem do banner"
-msgstr "Banner image link"
+msgstr ""
 
 #: sam/src/admin/forms.py:23
 msgid "Link de redirecionamento"
-msgstr "Redirect link"
+msgstr ""
 
 #: sam/src/admin/forms.py:24
 msgid "Link do formulário de contato para comissões"
-msgstr "Contact form link for commissions"
+msgstr ""
 
 #: sam/src/admin/forms.py:25
 msgid "Número total de slots"
-msgstr "Total slots"
+msgstr ""
 
 #: sam/src/admin/forms.py:26
 msgid "Slots usados"
-msgstr "Used slots"
+msgstr ""
 
 #: sam/src/admin/forms.py:27
 msgid "Comissões abertas"
-msgstr "Commissions opened"
+msgstr ""
 
 #: sam/src/admin/forms.py:32
 msgid "Os slots utilizados não podem ser maiores que o total de slots."
-msgstr "Used slots can't be greater than total slots"
+msgstr ""
 
 #: sam/src/admin/forms.py:35 sam/src/admin/forms.py:44
 msgid "Título"
-msgstr "Title"
+msgstr ""
 
 #: sam/src/admin/forms.py:36
 msgid "Descrição"
-msgstr "Description"
+msgstr ""
 
 #: sam/src/admin/forms.py:37
 msgid "Valor máximo do tipo"
-msgstr "Max type value"
+msgstr ""
 
 #: sam/src/admin/forms.py:38
 msgid "Link da imagem de exemplo do tipo"
-msgstr "Image example link of type"
+msgstr ""
 
 #: sam/src/admin/forms.py:46
 msgid "Tags (separadas por vírgula)"
-msgstr "Tags (by comma)"
+msgstr ""
 
 #: sam/src/admin/forms.py:47
 msgid "Conteúdo"
-msgstr "Content"
+msgstr ""
 
 #: sam/src/admin/forms.py:50
 msgid "Nome da imagem"
-msgstr "Image name"
+msgstr ""
 
 #: sam/src/admin/forms.py:51
 msgid "Listar na galeria de artes"
-msgstr "Is artwork"
+msgstr ""
 
 #: sam/src/admin/forms.py:52
 msgid "Link alternativo (Ex.: Postagem em rede social)"
-msgstr "Alternate link (Social media)"
+msgstr ""
 
 #: sam/src/admin/forms.py:55
 msgid "Arquivo de imagem"
-msgstr "File image"
+msgstr ""
 
 #: sam/src/admin/forms.py:55
 msgid "Apenas imagens do tipo .jpg, .png, .gif e .jpeg!"
-msgstr "Only .jpg, .png, .gif and .jpeg"
+msgstr ""
 
 #: sam/src/admin/forms.py:63
 msgid "Excluir item?"
-msgstr "Delete item?"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:12
 msgid "Agora mesmo"
-msgstr "Just now"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:14
 #, python-format
 msgid "Agora mesmo - %(seconds)s segundos"
-msgstr "Just now - %(seconds)s seconds"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:18
 msgid "Há 1 minuto"
-msgstr "One minute ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:20
 #, python-format
 msgid "Há %(minutes)s minutos"
-msgstr "%(minutes)s minutes ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:24
 msgid "Há 1 hora"
-msgstr "One hour ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:26
 #, python-format
 msgid "Há %(hours)s horas"
-msgstr "%(hours)s hours ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:30
 msgid "Há 1 dia"
-msgstr "One day ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:32
 #, python-format
 msgid "Há %(days)s dias"
-msgstr "%(days)s days ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:36
 msgid "Há 1 semana"
-msgstr "One week ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:38
 #, python-format
 msgid "Há %(weeks)s semanas"
-msgstr "%(weeks)s weeks ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:42
 msgid "Há 1 ano"
-msgstr "One year ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:44
 #, python-format
 msgid "Há %(years)s anos"
-msgstr "%(years)s years ago"
+msgstr ""
 
 #: sam/src/utils/aproximate.py:46
 #, python-format
 msgid "Em %(post_date)s"
-msgstr "In %(post_date)s"
+msgstr ""
 
 #: sam/templates/admin/commissions.html:20
 msgid "Modalidades de comissão"
-msgstr "Commissions modalities"
+msgstr ""
 
 #: sam/templates/admin/commissions.html:22
 msgid "Nova modalidade"
-msgstr "New modalities"
+msgstr ""
 
 #: sam/templates/admin/gallery.html:20
 msgid "Galeria de imagens"
-msgstr "Images gallery"
+msgstr ""
 
 #: sam/templates/admin/gallery.html:22
 #: sam/templates/macros/common_forms.html:25
 msgid "Nova imagem"
-msgstr "New imagem"
+msgstr ""
 
 #: sam/templates/admin/gallery.html:33
 msgid "Apenas artes"
-msgstr "Only artworks"
+msgstr ""
 
 #: sam/templates/admin/index.html:22
 msgid "Olá, Sam!"
-msgstr "Hello, Sam!"
+msgstr ""
 
 #: sam/templates/admin/index.html:25
 msgid "Estatísticas da semana"
-msgstr "Week statistics"
+msgstr ""
 
 #: sam/templates/admin/index.html:28
 msgid "Acessos"
-msgstr "Visits"
+msgstr ""
 
 #: sam/templates/admin/index.html:32 sam/templates/components/navbar.html:31
 msgid "Artes"
-msgstr "Arts"
+msgstr ""
 
 #: sam/templates/admin/index.html:36
 msgid "Postagens"
-msgstr "Posts"
+msgstr ""
 
 #: sam/templates/admin/index.html:44
 msgid "Configurações"
-msgstr "Settings"
+msgstr ""
 
 #: sam/templates/admin/index.html:58
 msgid "Configurações gerais"
-msgstr "General settings"
+msgstr ""
 
 #: sam/templates/admin/index.html:64
 msgid "Aviso global"
-msgstr "Global warning"
+msgstr ""
 
 #: sam/templates/admin/index.html:71 sam/templates/components/navbar.html:32
 #: sam/templates/components/navbar.html:39
 #: sam/templates/public/commissions.html:32
 msgid "Comissões"
-msgstr "Commissions"
+msgstr ""
 
 #: sam/templates/admin/index.html:79 sam/templates/macros/common_forms.html:49
 #: sam/templates/macros/common_forms.html:106
 msgid "Salvar"
-msgstr "Save"
+msgstr ""
 
 #: sam/templates/admin/login.html:19 sam/templates/admin/login.html:25
 msgid "Entrar"
-msgstr "Login"
+msgstr ""
 
 #: sam/templates/components/all.html:45
 msgid "Ocorreu um erro ao completar a solicitação."
-msgstr "An error occurred while completing the request."
+msgstr ""
 
 #: sam/templates/components/all.html:46
 msgid "Item não encontrado."
-msgstr "Item not found."
+msgstr ""
 
 #: sam/templates/components/all.html:47
 msgid "Você não tem permissão para realizar esta ação."
-msgstr "You do not have permission to perform this action."
+msgstr ""
 
 #: sam/templates/components/all.html:48
 msgid "Você precisa estar autenticado para realizar esta ação."
-msgstr "You need to be authenticated to perform this action."
+msgstr ""
 
 #: sam/templates/components/all.html:49
 msgid "Ocorreu um erro ao copiar o texto."
-msgstr "An error occurred while copying the text."
+msgstr ""
 
 #: sam/templates/components/all.html:50
 msgid "Seu navegador restringiu a copia, realize a copia manualmente."
-msgstr "Your browser has restricted copying, please perform the copy manually."
+msgstr ""
 
 #: sam/templates/components/all.html:51
-msgid "Por favor, selecione um arquivo de imagem válido (.png, .jpg, .jpeg, .gif)."
-msgstr "Please select a valid image file (.png, .jpg, .jpeg, .gif)."
+msgid ""
+"Por favor, selecione um arquivo de imagem válido (.png, .jpg, .jpeg, "
+".gif)."
+msgstr ""
 
 #: sam/templates/components/all.html:52
 msgid "Você excedeu a quantidade de tentativas, tente novamente mais tarde."
-msgstr "You have exceeded the number of attempts, please try again later."
+msgstr ""
 
 #: sam/templates/components/all.html:53
-msgid "Ocorreu um erro interno no servidor, contate o desenvolvedor imediatamente."
-msgstr "An internal server error has occurred, contact the developer immediately."
+msgid ""
+"Ocorreu um erro interno no servidor, contate o desenvolvedor "
+"imediatamente."
+msgstr ""
 
 #: sam/templates/components/all.html:57
 msgid "Carregando..."
-msgstr "Loading..."
+msgstr ""
 
 #: sam/templates/components/all.html:58
 msgid "Processando..."
-msgstr "Processing..."
+msgstr ""
 
 #: sam/templates/components/all.html:59
 msgid "Entrando..."
-msgstr "Entering..."
+msgstr ""
 
 #: sam/templates/components/all.html:64
 msgid "Texto copiado!"
-msgstr "Text copied!"
+msgstr ""
 
 #: sam/templates/components/all.html:68
 msgid "R$ "
-msgstr "$ "
+msgstr ""
 
 #: sam/templates/components/footer.html:5
 msgid "Social"
-msgstr "Social"
+msgstr ""
 
 #: sam/templates/components/footer.html:12
 msgid "Transparência"
-msgstr "Transparency"
+msgstr ""
 
 #: sam/templates/components/footer.html:13
 msgid "Código fonte do site"
-msgstr "Website source code"
+msgstr ""
 
 #: sam/templates/components/footer.html:14
 msgid "Idiomas"
-msgstr "Languages"
+msgstr ""
 
 #: sam/templates/components/footer.html:18
 msgid "Apoie"
-msgstr "Support"
+msgstr ""
 
 #: sam/templates/components/footer.html:20
 msgid "Administrativo"
-msgstr "Administrative"
+msgstr ""
 
 #: sam/templates/components/footer.html:21
 msgid "Meu espaço"
-msgstr "My space"
+msgstr ""
 
 #: sam/templates/components/footer.html:26
 msgid "© 2024 Todos os direitos reservados - Sam Mahonri"
-msgstr "© 2024 All rights reserved - Sam Mahonri"
+msgstr ""
 
 #: sam/templates/components/footer.html:27
 msgid "Feito com <i class=\"fa-solid fa-heart\"></i> por Sam Mahonri"
-msgstr "Made with <i class=\"fa-solid fa-heart\"></i> by Sam Mahonri"
+msgstr ""
 
 #: sam/templates/components/lang.html:2
 msgid "PT-BR"
-msgstr "PT-BR"
+msgstr ""
 
 #: sam/templates/components/lang.html:3
 msgid "EN"
-msgstr "EN"
+msgstr ""
 
 #: sam/templates/components/lang.html:4
 msgid "ES"
-msgstr "ES"
+msgstr ""
 
 #: sam/templates/components/lang.html:5
 msgid "FR"
-msgstr "FR"
+msgstr ""
 
 #: sam/templates/components/navbar.html:30
 msgid "Início"
-msgstr "Home"
+msgstr ""
 
 #: sam/templates/components/navbar.html:33
 #: sam/templates/components/navbar.html:34
 msgid "Indisponível - Em breve"
-msgstr "Unavailable - Coming soon"
+msgstr ""
 
 #: sam/templates/components/navbar.html:33
 msgid "Projetos"
-msgstr "Projects"
+msgstr ""
 
 #: sam/templates/components/navbar.html:34 sam/templates/public/index.html:47
 msgid "Sobre mim"
-msgstr "About me"
+msgstr ""
 
 #: sam/templates/components/navbar.html:37
 msgid "Painel"
-msgstr "Panel"
+msgstr ""
 
 #: sam/templates/components/navbar.html:38
 msgid "Galeria"
-msgstr "Gallery"
+msgstr ""
 
 #: sam/templates/components/navbar.html:40 sam/templates/public/index.html:45
 msgid "Novidades"
-msgstr "News"
+msgstr ""
 
 #: sam/templates/components/navbar.html:42
 msgid "Alternar esquema de cores"
-msgstr "Toggle color scheme"
+msgstr ""
 
 #: sam/templates/components/navbar.html:47
 msgid "Ir para página de administração"
-msgstr "Go to administration page"
+msgstr ""
 
 #: sam/templates/components/navbar.html:51
 msgid "Encerrar sessão"
-msgstr "Log out"
+msgstr ""
 
 #: sam/templates/components/warning.html:14
 msgid "Saiba mais"
-msgstr "know more"
+msgstr ""
 
 #: sam/templates/layouts/errorpage.html:14
 msgid "Página não encontrada"
-msgstr "Page not found"
+msgstr ""
 
 #: sam/templates/layouts/errorpage.html:17
 msgid "Vai com calma!"
-msgstr "Calm down!"
+msgstr ""
 
 #: sam/templates/layouts/errorpage.html:18
 msgid ""
@@ -414,150 +415,149 @@ msgid ""
 "entusiasmado demais. Limitamos para evitar ataques de negação de serviço "
 "DoS/DDoS"
 msgstr ""
-"We limit your access for a short period of time because you are too "
-"enthusiastic. We limit to prevent DoS/DDoS denial of service attacks"
 
 #: sam/templates/layouts/errorpage.html:21
 msgid "Não pode!"
-msgstr "It cannot!"
+msgstr ""
 
 #: sam/templates/layouts/errorpage.html:24
 msgid "Ocorreu um erro interno"
-msgstr "An internal error has occurred"
+msgstr ""
 
 #: sam/templates/layouts/errorpage.html:29
 msgid "Faça login"
-msgstr "Log in"
+msgstr ""
 
 #: sam/templates/layouts/errorpage.html:31
 msgid "Voltar à página inicial"
-msgstr "Return to home page"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:11
 msgid "Publicar imagem"
-msgstr "Publish image"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:18
 msgid "Publicar"
-msgstr "Publish"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:23
 msgid "Imagem publicada!"
-msgstr "Image published!"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:43
 #: sam/templates/macros/img_view.html:47
 msgid "Editar dados da imagem"
-msgstr "Edit image data"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:62
 msgid "Deseja realmente excluir este item?"
-msgstr "Do you really want to delete this item?"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:66
 msgid "Excluir"
-msgstr "Delete"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:79
 msgid "Criar modalidade"
-msgstr "Create modality"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:85
 msgid "Criar"
-msgstr "Create"
+msgstr ""
 
 #: sam/templates/macros/common_forms.html:99
 msgid "Editar modalidade"
-msgstr "Edit modality"
+msgstr ""
 
 #: sam/templates/macros/form_input.html:39
 msgid "Copiar"
-msgstr "Copy"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:1
 msgid "Visualização"
-msgstr "Preview"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:8
 msgid "Preencher seção"
-msgstr "Fill section"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:37
 msgid "Engaje"
-msgstr "Engage"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:39
 msgid "Fazer download"
-msgstr "Download"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:41
 msgid "Copiar link direto"
-msgstr "Copy direct link"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:44
 msgid "Copiar link da miniatura"
-msgstr "Copy thumbnail link"
+msgstr ""
 
 #: sam/templates/macros/img_view.html:50
 msgid "Excluir imagem"
-msgstr "Delete image"
+msgstr ""
 
 #: sam/templates/public/commissions.html:4
 msgid "Sam Mahonri - Comissões"
-msgstr "Sam Mahonri - Commissions"
+msgstr ""
 
 #: sam/templates/public/commissions.html:37
 msgid "Slots disponiveis"
-msgstr "Available slots"
+msgstr ""
 
 #: sam/templates/public/commissions.html:40
 msgid "de"
-msgstr "of"
+msgstr ""
 
 #: sam/templates/public/commissions.html:43
 msgid "Aberto"
-msgstr "Open"
+msgstr ""
 
 #: sam/templates/public/commissions.html:45
 msgid "Fechado - Em breve"
-msgstr "Closed - Coming soon"
+msgstr ""
 
 #: sam/templates/public/commissions.html:48
 msgid "Ver preços"
-msgstr "See prices"
+msgstr ""
 
 #: sam/templates/public/commissions.html:50
 msgid "Formulário"
-msgstr "Form"
+msgstr ""
 
 #: sam/templates/public/gallery.html:4
 msgid "Sam Mahonri - Artes"
-msgstr "Sam Mahonri - Arts"
+msgstr ""
 
 #: sam/templates/public/gallery.html:32 sam/templates/public/index.html:46
 msgid "Arte & Design"
-msgstr "Art & Design"
+msgstr ""
 
 #: sam/templates/public/gallery.html:36
 msgid "Ver tudo"
-msgstr "see it all"
+msgstr ""
 
 #: sam/templates/public/gallery.html:38
 msgid "Encomendar"
-msgstr "Order"
+msgstr ""
 
 #: sam/templates/public/index.html:40
 msgid "Sobre mim - Resumo"
-msgstr "About me - Summary"
+msgstr ""
 
 #: sam/templates/public/index.html:67
 msgid "Portfólio"
-msgstr "Portfolio"
+msgstr ""
 
 #: sam/templates/public/index.html:69
 msgid "Projetos recentes"
-msgstr "Recent projects"
+msgstr ""
 
 #: sam/templates/public/index.html:72
 msgid "Em breve, um pequeno Blog aqui..."
-msgstr "Coming soon, a small blog here..."
+msgstr ""
+

@@ -1,5 +1,9 @@
 {% extends 'layouts/base.html' %}
 
+{% block title %}
+    {{ _('Sam Mahonri - Artes') }}
+{% endblock %}
+
 {% block content %}
 
 <style>
@@ -22,10 +26,19 @@
                     <span class="markRailBottom"></span>
                 </span>
                 <span style="width: 256px;" class="onlyDesktop aos-init" data-aos="fade-left" data-aos-delay="1250">{% include 'components/sam_logo.html' %}</span>
-                <div class="flex columnFlex justifyStart alignStart wp100 gapMedium aos-init" data-aos="fade">
+                <div class="flex columnFlex justifyStart alignStart wp100 gapMedium flexExpand aos-init" data-aos="fade">
                     <span class="navComp"></span>
-                    <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Arte & Design') }}</h1>
-                    <span class="aos-init" data-aos="fade-up" data-aos-delay="1800"><button class="primaryButton" onclick="scrollToSection('art-section')"><i class="fa-solid fa-arrow-down"></i>{{ _('Ver tudo')}}</button></span>
+                    <div class="flex overflowHidden">
+                        <h1 class="textLeft aos-init" data-aos="fade-up" data-aos-delay="500">{{ _('Arte & Design') }}</h1>
+                    </div>
+                    
+                    <div class="flex flexGrid gapMedium extraMargin">
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="1800"><button class="primaryButton" onclick="scrollToSection('art-section')"><i class="fa-solid fa-arrow-down"></i>{{ _('Ver tudo')}}</button></span>
+                        {% if global_settings.get('comms_open', False) %}
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="2000"><a href="/commissions" ><button class="plainButton"><i class="fa-solid fa-paw"></i>{{ _('Encomendar')}}</button></a></span>
+                        {% endif %}
+                    </div>
+                    {% include 'components/warning.html' %}
                 </div>
             </div>
         </div>

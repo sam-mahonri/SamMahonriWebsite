@@ -1,0 +1,17 @@
+{% if global_settings.get('warning_show', False) %}
+<div class="wp100 hpFit flex columnFlex alignCenter overlayPanel warningPanel aos-init" data-aos="fade-down" data-aos-delay="500">
+    <style>
+        .warningPanel{
+            background-image: url('{{ global_settings.get("image_link") }}');
+        }
+    </style>
+    <h2>{{ global_settings.get('title') }}</h2>
+    <p>
+        {{ global_settings.get('description') }}
+    </p>
+
+    {% if global_settings.get('redirect_link', "") != "" %}
+    <span class="aos-init" data-aos="fade-up"><a href="{{ global_settings.get('redirect_link') }}" class="wpFit"><button class="primaryButton"><i class="fa-solid fa-book-bookmark"></i>{{ _('Saiba mais')}}</button></a></span>
+    {% endif %}
+</div>
+{% endif %}

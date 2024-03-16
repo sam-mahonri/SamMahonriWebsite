@@ -5,7 +5,7 @@
     backdrop-filter: blur(0px) !important;
     background-color: transparent !important;
     box-shadow: 0px 0px 0px transparent !important;
-    border-color: var(--neutral-color);
+    border-color: transparent;
 }
 
 nav{
@@ -31,7 +31,7 @@ nav{
 
 .checkbox-label > p{
     translate: 0px 2px;
-    font-size: 13pt;
+    font-size: 11pt;
 }
 
 .checkbox-label input {
@@ -84,13 +84,14 @@ nav{
 }
 
 .innerLabel{
-    
+    margin-bottom: -16px;
+    margin-top: 16px;
     width: 100%;
 }
 
 .innerLabel > span{
     pointer-events: none;
-    max-width: 80%;
+    max-width: calc(100% - 16px);
     display: inline-block;
     position: relative;
     bottom: 58px;
@@ -98,23 +99,26 @@ nav{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 12pt;
+    font-size: 10pt;
     padding: 16px;
     padding-top: 4px;
     padding-bottom: 4px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     margin-bottom: -32px;
+    min-width: 0px;
 }
 .innerLabel > input:focus ~ span,
 .innerLabel > input:not(:placeholder-shown) ~ span,
 .innerLabel > input:focus ~ span *,
 .innerLabel > input:not(:placeholder-shown) ~ span *{
-    bottom: 94px;
+    bottom: 88px;
     left: 0px;
     max-width: calc(100% - 8px);
     background-color: var(--theme-color);
     color: var(--light-color);
+    font-size: 11pt;
     
 
 }.innerLabel > input:not(:placeholder-shown), .innerLabel > input:focus{

@@ -1,6 +1,7 @@
+
+
 {% include 'components/splash.html' %}
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script >
     AOS.init({
@@ -61,9 +62,15 @@
 
     const OK = Object.freeze({
         COPIED: "{{ _('Texto copiado!') }}"
-    })
+    });
 
-    const DEFAULT_LOADING_SPINNER = `{% include 'components/loading_spinner.html' %}`
+    const LC = Object.freeze({
+        CIFR: "{{ _('R$ ') }}"
+    });
+
+    const DEFAULT_LOADING_SPINNER = `{% include 'components/loading_spinner.html' %}`;
+
+    const SYMBOLIC_LOGGED = String(`{{ "true" if session["user"] else "false"}}`) == 'true';
 </script>
 
 <script src="{{ url_for('static', filename='js/furtheme.js') }}"></script>

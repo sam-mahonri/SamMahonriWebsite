@@ -256,13 +256,17 @@ function changeLanguage(url) {
     window.location.href = `${url}?page=${currentPagePath}`;
 }
 
-function copyText(idInput) {
-    var inputElement = document.getElementById(idInput);
+function copyText(idInput=null, text = "") {
+    var inputElement;
+    if (idInput){
+        inputElement = document.getElementById(idInput);
+        text = inputElement.value;
+    }
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(inputElement.value)
+        navigator.clipboard.writeText(text)
             .then(() => {
-                inputElement.select();
+                if(inputElement) inputElement.select();
                 showFlashMessage(OK.COPIED, 'successFlash');
             })
             .catch(err => {
@@ -272,6 +276,13 @@ function copyText(idInput) {
         showFlashMessage(ERR.COPY_UNSUPPORTED, 'errorFlash');
     }
 }
+
+function toggleBtSubmit(ch, id){
+    let btDel = document.getElementById(id + "-bt-submit");
+    ch ? btDel.classList.remove('disabled') : btDel.classList.add('disabled');
+}
+
+var lockCheckScrollEnd = false;
 
 function populateImageGrid(images, update = false) {
     const gridContainer = document.getElementById('imageGrid');
@@ -286,8 +297,6 @@ function populateImageGrid(images, update = false) {
         indexCounter++;
         const container = document.createElement('div');
         container.classList.add('imageContainer');
-
-        console.log(image)
 
         container.onclick = function(){
             launchPopup("/macro/image-viewer?db-image-id=" + image._id, 'pop-container')
@@ -333,7 +342,7 @@ function populateImageGrid(images, update = false) {
                 const lastImageContainer = gridContainer.querySelector('.imageContainer:last-child');
                 if (lastImageContainer) {
                     lockCheckScrollEnd = false;
-                    checkScrollEnd(selector = '#imageGrid .imageContainer:last-child');
+                    checkScrollEnd(selector = '#imageGrid .imageContainer:last-child', 'image');
                 }
             }
         };
@@ -342,9 +351,100 @@ function populateImageGrid(images, update = false) {
     });
 }
 
-var lockCheckScrollEnd = false;
+function populateModalityGrid(modalities, update = false) {
+    const gridContainer = document.getElementById('modalityGrid');
+    const fragment = document.createDocumentFragment();
 
-function checkScrollEnd(selector) {
+    if (!update) gridContainer.innerHTML = '';
+
+    let loadedModalitiesCount = 0;
+    let indexCounter = 0;
+
+    modalities.forEach((modality, index) => {
+        indexCounter++;
+        const container = document.createElement('div');
+        container.classList.add('postContainer');
+        container.classList.add('aos-init');
+        container.dataset.aos = 'fade-up';
+        container.dataset.aosDelay = String(indexCounter * 200);
+
+        const imageElement = new Image();
+        imageElement.classList.add('aos-init');
+        imageElement.dataset.aos = 'zoom-out';
+        imageElement.dataset.aosDelay = String(indexCounter * 200);
+        imageElement.alt = modality.title;
+
+        const title = document.createElement('h2');
+        title.textContent = modality.title;
+
+        const description = document.createElement('p');
+        description.textContent = modality.description;
+
+        const price = document.createElement('h2');
+        price.textContent = LC.CIFR + String(modality.type_value).replace('.', ',');
+
+        const descrSection = document.createElement('div');
+        descrSection.className = "paddingMedium flex columnFlex gapSmall wp100 alignCenter justifyCenter"
+
+        container.appendChild(imageElement);
+        descrSection.appendChild(title);
+        descrSection.appendChild(description);
+        descrSection.appendChild(price);
+        
+        if (SYMBOLIC_LOGGED){
+            const commandSection = document.createElement('div');
+            commandSection.className = "flex rowFlex gapMedium";
+
+            const editBt = document.createElement('button');
+            editBt.className = "selectorButton";
+            editBt.innerHTML = "<i class='fa-solid fa-pen-to-square'></i>";
+            editBt.onclick = function(){
+                launchPopup('/macro/edit_modality?&slug=' + modality.slug, 'pop-container');
+            }
+
+            const deleteBt = document.createElement('button');
+            deleteBt.className = "selectorButton";
+            deleteBt.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
+            deleteBt.onclick = function(){
+                launchPopup('/macro/delete-item?callback=closePopsModalities&item-id=' + modality.slug + '&route=/api/commissions/modality', 'pop-container');
+            }
+
+            commandSection.appendChild(editBt);
+            commandSection.appendChild(deleteBt);
+
+            descrSection.appendChild(commandSection);
+        }       
+
+
+        container.appendChild(descrSection)
+
+        fragment.appendChild(container);
+
+        imageElement.onload = () => {
+            loadedModalitiesCount++;
+
+            if (loadedModalitiesCount === modalities.length) {
+                gridContainer.appendChild(fragment);
+
+                setTimeout(() => {
+                    gridContainer.querySelectorAll('.postContainer').forEach(container => {
+                        container.querySelector('img').classList.add('active');
+                    });
+                }, 0);
+
+                const lastModalityContainer = gridContainer.querySelector('.postContainer:last-child');
+                if (lastModalityContainer) {
+                    lockCheckScrollEnd = false;
+                    checkScrollEnd(selector = '#modalityGrid .postContainer:last-child', 'modality');
+                }
+            }
+        };
+
+        imageElement.src = modality.image_link;
+    });
+}
+
+function checkScrollEnd(selector, processType) {
     let requestId;
     
     function handleScroll() {
@@ -352,8 +452,13 @@ function checkScrollEnd(selector) {
         if (lastElement) {
             const lastElementRect = lastElement.getBoundingClientRect();
             if (lastElementRect.bottom <= window.innerHeight + 256 && !lockCheckScrollEnd) {
-                fetchImages(true);
                 lockCheckScrollEnd = true;
+                if (processType === 'modality') {
+                    fetchModalities(true);
+                } else if (processType === 'image') {
+                    fetchImages(true);
+                }
+                
             }
         }
         requestId = null;

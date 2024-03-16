@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<style>
+    .back1 {
+        background-image: url('{{ global_settings.get("image_link") }}');
+    }
+
+    .back2 {
+        background-image: url('/static/source/backgallery.svg');
+    }
+</style>
+
+<main class="back backOverlay back1" id="init-main">
+    <section>
+            <div class="flex wp100 justifyCenter alignStartCenter paddingLarge borderBox columnFlex minusTopNav backFixed">
+                <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium aos-init" data-aos="fade">
+                    <span class="navComp"></span>
+                    <h1 class="textLeft aos-init" data-aos="fade-left">{{ _('Modalidades de comissão') }}</h1>
+                    <hr>
+                    <button class="primaryButton wpFit" id="bt-open-upload-dialog" onclick="launchPopup('/macro/create_modality?callback=reloadModalities', 'pop-container');"><i class="fa-solid fa-square-plus"></i>{{ _('Nova modalidade') }}</button>
+                </div>
+            </div>
+    </section>
+</main>
+<main class="back back2" id="init-main">
+    <section>
+        <div class="flex hv100 wp100 alignStartCenter paddingLarge borderBox columnFlex minusTopNav backFixed">
+            <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium">
+                <div id="modalityGrid" class="gridContainer gapMedium"></div>
+                <script>
+                    setTimeout(() => {
+                        fetchModalities()
+                    }, 100);
+                </script>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

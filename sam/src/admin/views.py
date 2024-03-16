@@ -46,6 +46,10 @@ def admin(only_data = False):
     else: return statistics, form
 
 
-@admin_bp.route("/gallery", methods=['POST', 'GET'])
+@admin_bp.route("/gallery")
 @jwt_required()
 def gallery(): return render_template('admin/gallery.html')
+
+@admin_bp.route("/commissions")
+@jwt_required()
+def commissions(): return render_template('admin/commissions.html')

@@ -5,8 +5,8 @@ from ..enums import success as Ok
 from dotenv import load_dotenv
 import os
 import requests
-from ..database import User, Statistics, GeneralSettings, Gallery, bcrypt
-from ..admin.forms import GeneralSettingsForm, GalleryForm, GalleryEditForm, DeleteItem
+from ..database import User, Statistics, GeneralSettings, Gallery, Modalities, bcrypt
+from ..admin.forms import GeneralSettingsForm, GalleryForm, GalleryEditForm, DeleteItem, BaseCommissionType, EditCommissionType
 from flask_jwt_extended import (
     create_access_token, jwt_required, get_jwt_identity,
     set_access_cookies, unset_jwt_cookies, get_jwt
@@ -118,6 +118,82 @@ def upload_image():
         
     return jsonify(result)
 
+@api_bp.route('/commissions/modality', methods=['POST', 'PUT', 'DELETE'])
+@jwt_required()
+def modalities():
+    result = OUTPUT_TEMPLATE
+    
+    if request.method == "POST":
+        form = BaseCommissionType()
+        slug = None
+        if form.validate_on_submit():
+            data = form.data
+            data.pop('csrf_token')
+            slug = Modalities.create(data=data)
+            result["success"] = True if slug else False
+            result["message"] = Ok.Success.SUCCESS_POST.value if slug else Err.Errors.DB_SAVE_PROBLEM.value
+        else: 
+            result = {"success": False, "message": Err.Errors.ERROR_FORM.value}
+        result["data"] = {"form_fields": form.data, "form_errors": form.errors, "slug": slug if slug else ''}
+        
+    elif request.method == "PUT":
+        form = EditCommissionType()
+        if form.validate_on_submit():
+            data = form.data
+            data.pop('csrf_token')
+            result["success"] = Modalities.update_by_slug(slug = data.get("slug"), data = data) 
+            result["message"] = Ok.Success.SUCCESS_SAVED.value if result["success"] else Err.Errors.NO_CHANGES.value
+        else: 
+            result = {"success": False, "message": Err.Errors.ERROR_FORM.value}
+        result["data"] = {"form_fields": form.data, "form_errors": form.errors}
+        
+    elif request.method == "DELETE":
+        form = DeleteItem()
+        if form.validate_on_submit():
+            if form.please_delete.data:
+                result["success"] = Modalities.delete_by_slug(form.item_id.data)
+                result["message"] = Ok.Success.SUCCESS_DELETED.value if result["success"] else Err.Errors.NO_CHANGES.value
+            else:
+                result["success"] = False
+                result["message"] = Err.Errors.NO_CHANGES.value
+        else: 
+            result = {"success": False, "message": Err.Errors.ERROR_FORM.value}
+        result["data"] = {"form_fields": form.data, "form_errors": form.errors}
+    
+    return jsonify(result)
+
+@api_bp.route('/commissions/modality/list', methods=['GET'])
+def list_modalities():
+    result = OUTPUT_TEMPLATE
+    try:
+        page = int(request.args.get('page', 1))
+        tag = request.args.get('tag', None)
+        query = request.args.get('query', None)
+
+        modalities, _total_pages = Modalities.list_all(page=page, query=None)
+
+        if modalities:
+            result = {
+                "success": True,
+                "message": Ok.Success.SUCCESS_LOADED.value,
+                "data": {
+                    "modalities": modalities,
+                    "_total_pages": _total_pages
+                }
+            }
+        else:
+            result = {
+                "success": False,
+                "message": Err.Errors.NOT_FOUND.value
+            }
+    except Exception as e:
+        print(f"Erro ao listar imagens: {str(e)}")
+        result = {
+            "success": False,
+            "message": Err.Errors.GENERIC_ERROR.value
+        }
+
+    return jsonify(result)
 
 @api_bp.route('/gallery/list', methods=['GET'])
 def list_gallery():

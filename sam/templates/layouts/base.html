@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block opengraph %}
         <meta property="og:url" content="https://sammahonri.com">
-        <meta property="og:type" content="website">
         <meta property="og:image" content="static\source\default_og.png">
     {% endblock %}
     <title>
@@ -13,8 +12,9 @@
             Sam Mahonri - Portfólio
         {% endblock %}
     </title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
 <body>
     {% include 'components/all.html' %}

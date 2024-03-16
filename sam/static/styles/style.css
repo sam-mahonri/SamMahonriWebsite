@@ -37,6 +37,11 @@ h1 {
     background-color: var(--error-color);
 }
 
+.backGreen {
+    color: var(--dark-color) !important;
+    background-color: var(--success-color);
+}
+
 h2 {
     font-size: var(--h2-text-size);
 }
@@ -898,7 +903,7 @@ footer {
 
 .gridContainer img {
     transition: scale var(--transition-duration) ease-in-out;
-    min-width: 360px;
+    min-width: 300px;
     flex: 1;
     height: 50vh;
     object-fit: cover;
@@ -909,7 +914,7 @@ footer {
     position: relative;
     display: inline-block;
     overflow: hidden;
-    min-width: 360px;
+    min-width: 350px;
     flex: 1;
     height: 40vh;
 }
@@ -932,6 +937,11 @@ footer {
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+.backOverlay{
+    background-blend-mode: overlay;
+    background-color: var(--current-back-color);
 }
 
 .imageContainer img {
@@ -1014,4 +1024,49 @@ footer {
         text-align: center;
     }
 
+    .imageContainer,
+    .postContainer{
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+
+}
+
+.overlayPanel{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: center;
+    background-color: var(--sec-dark);
+    border-radius: var(--border-2-radius);
+    padding: var(--padding-panel);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    overflow: hidden;
+    border: solid 1px var(--neutral-color);
+}.overlayPanel > *{
+    text-align: center;
+}
+
+.postContainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    gap: var(--gap-small);
+    border-radius: var(--border-2-radius);
+    background-color: var(--sec-dark);
+    border: solid 1px var(--neutral-color);
+    overflow: hidden;
+    min-width: 400px;
+    
+}.postContainer img{
+    object-fit: cover;
+    width: 100%;
+    max-height: 40vh;
+}.postContainer *{
+    text-align: center;
 }

@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    {{ _('Sam Mahonri - Comissões') }}
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .back1 {
+        background-image: url('{{ global_settings.get("image_link") }}');
+        
+    }
+
+    .back2 {
+        background-image: url('static/source/backgallery2.svg');
+    }
+</style>
+
+<main class="back backOverlay back1" id="init-main">
+    <section>
+        <div class="flex hv100 wp100 justifyCenter alignStart paddingLarge borderBox columnFlex minusTopNav backFixed">
+            
+            <div class="flex rowFlex wp100 gapMedium alignCenter">
+                <span class="dotMark aos-init animate-me" data-aos="fade-up" data-aos-delay="1250">
+                    <span class="markRailBottom"></span>
+                </span>
+                <span style="width: 256px;" class="onlyDesktop aos-init" data-aos="fade-left" data-aos-delay="1250">{% include 'components/sam_logo.html' %}</span>
+                <div class="flex columnFlex justifyStart alignStart wp100 gapMedium flexExpand aos-init" data-aos="fade">
+                    <span class="navComp"></span>
+                    <div class="flex overflowHidden">
+                        <h1 class="textLeft aos-init" data-aos="fade-up" data-aos-delay="500">{{ _('Comissões') }}</h1>
+                    </div>
+                    
+                    {% if global_settings.get('comms_open', False) %}
+                        
+                        <h2 class="  aos-init" data-aos="fade-up" data-aos-delay="700">{{ _("Slots disponiveis") }}  </h2>
+                        <div class="flex rowFlex gapMedium aos-init" data-aos="fade-up" data-aos-delay="900">
+                            <span class="overlayPanel aos-init" data-aos="fade-up" data-aos-delay="1100"><h2>{{ global_settings.get('used_slots', 0) }}</h2></span>
+                            <h2 class=" aos-init" data-aos="fade-up" data-aos-delay="1300">{{ _('de') }}</h2>
+                            <span class="overlayPanel aos-init" data-aos="fade-up" data-aos-delay="1500"><h2>{{ global_settings.get('total_slots', 0) }}</h2></span>
+                        </div>
+                        <span class="tag backGreen aos-init" data-aos="fade-up" data-aos-delay="1000">{{ _('Aberto') }}</span>
+                    {% else %}
+                        <span class="tag backRed aos-init" data-aos="fade-up" data-aos-delay="1000">{{ _('Fechado - Em breve') }}</span>
+                    {% endif %}
+                    <div class="flex flexGrid gapMedium extraMargin">
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="1800"><button class="primaryButton" onclick="scrollToSection('art-section')"><i class="fa-solid fa-arrow-down"></i>{{ _('Ver preços')}}</button></span>
+                        {% if global_settings.get('form_comms_link', '') != '' and global_settings.get('comms_open', False) %}
+                        <span class="aos-init" data-aos="fade-up" data-aos-delay="2000"><a href="{{ global_settings.get('form_comms_link') }}" target="_blank"><button class="plainButton"><i class="fa-solid fa-paw"></i>{{ _('Formulário')}}</button></a></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<main class="back back2" id="art-section">
+    <section>
+        <div class="flex hv100 wp100 alignStartCenter paddingLarge borderBox columnFlex minusTopNav backFixed">
+            <span class="navComp"></span>
+            <div class="flex columnFlex justifyStart alignStartCenter wp100 gapMedium">
+                <div id="modalityGrid" class="gridContainer gapMedium"></div>
+                <script>
+                    setTimeout(() => {
+                        fetchModalities()
+                    }, 100);
+                </script>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

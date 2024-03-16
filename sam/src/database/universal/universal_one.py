@@ -5,19 +5,16 @@ from datetime import datetime
 # Foi originalmente implementada para trabalhar com conteúdo "estático" de páginas ou configurações globais de um site
 
 class UniversalOne:
-    collection_name = "general" # Nome da coleção que terá o documento único
     allowed_fields = {} # Campos permitidos para manter a consistência do sistema, se {} então qualquer campo é permitido
-    collection = mongo_client.get_database()[collection_name]
+    collection = mongo_client.get_database()["general"]
     
     @classmethod
     def update(cls, data={}):
         try:
-            
-
             if cls.allowed_fields == {} or all(field in cls.allowed_fields for field in data.keys()):
                 document = cls.find()
-                data['updated_at'] = datetime.utcnow()
-                if document is None: data['created_at'] = datetime.utcnow()
+                data['updated_at'] = datetime.now() 
+                if document is None: data['created_at'] = datetime.now() 
                 cls.collection.update_one({}, {'$set': data}, upsert=True)
                 
                 return True

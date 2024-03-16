@@ -17,7 +17,7 @@ async function handleRequestErrors(response) {
     }
 }
 
-function disabledForm(form, disabled = true){
+function disabledForm(form, disabled = true) {
     var elementosFormulario = form.elements;
 
     for (var i = 0; i < elementosFormulario.length; i++) {
@@ -25,8 +25,7 @@ function disabledForm(form, disabled = true){
     }
 }
 
-async function submitForm(event, form, callback = null, c_method=null, loading_msg=DEF.PROCESSING) {
-    console.log(c_method)
+async function submitForm(event, form, callback = null, c_method = null, loading_msg = DEF.PROCESSING) {
     event.preventDefault();
     if (!form.classList.contains('disabled')) {
         placeholderLoading('nav-loading');
@@ -38,8 +37,6 @@ async function submitForm(event, form, callback = null, c_method=null, loading_m
         const url = form.action;
         const method = c_method ? c_method : form.method;
 
-        console.log(method)
-
         try {
             const response = await fetch(url, {
                 method: method,
@@ -50,7 +47,7 @@ async function submitForm(event, form, callback = null, c_method=null, loading_m
             await handleRequestErrors(response);
 
             const req_data = await response.json();
-  
+
             showFlashMessage(req_data.message, req_data.success ? 'successFlash' : 'errorFlash');
             resetErrorMessages(req_data.data.form_fields, req_data.data.form_errors);
 
@@ -64,7 +61,6 @@ async function submitForm(event, form, callback = null, c_method=null, loading_m
                 executeCallbacks(callback, form.id, req_data)
             }
         } catch (error) {
-            console.error(error.message)
             showFlashMessage(error.message, 'errorFlash');
             return error.status;
         } finally {
@@ -82,7 +78,7 @@ async function submitForm(event, form, callback = null, c_method=null, loading_m
 async function addTemplate(urlRota, elementoId, executarScripts = false, showLoading = true) {
     const elemento = document.getElementById(elementoId);
     try {
-        
+
         if (elemento && showLoading) {
             elemento.innerHTML = DEFAULT_LOADING_SPINNER;
         }
@@ -90,12 +86,12 @@ async function addTemplate(urlRota, elementoId, executarScripts = false, showLoa
         const response = await fetch(urlRota);
 
         setTimeout(() => {
-            switch (response.status){
+            switch (response.status) {
                 case 401: location.reload(); break;
                 case 403: location.reload(); break;
             }
         }, 2000);
-        
+
         await handleRequestErrors(response);
 
         const html = await response.text();
@@ -111,17 +107,8 @@ async function addTemplate(urlRota, elementoId, executarScripts = false, showLoa
         if (elemento) {
             elemento.innerHTML = '';
         }
-        
-        return error.status;
-    }
-}
 
-function executeCallbacks(callback = "self" , target, data){
-    switch (callback){
-        case "self": resetAndShowImageLink(target, data); break;
-        case "closeReloadSelf": closeReloadSelf(target, data); break;
-        case "loginSuccess": window.location = "/admin"; break;
-        case "closePops": closePopsAndReload();
+        return error.status;
     }
 }
 
@@ -134,26 +121,59 @@ async function fetchImages(nextPage = false, only_arts = onlyArts, query = curre
     currentQuery = query;
 
     placeholderLoading('nav-loading');
-    if(nextPage) pageImage++;
+    if (nextPage) pageImage++;
     else pageImage = 1;
 
     let fetchURL = "/api/gallery/list" + "?page=" + String(pageImage) + (only_arts ? "&is_artwork=True" : "") + (query != "" ? "&query=" + query : "")
 
     await fetch(fetchURL)
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            populateImageGrid(data.data.images, nextPage ? true : false);
-        } else {
-            setTimeout(() => {
-                if (!nextPage) document.getElementById('imageGrid').innerHTML = "";
-            }, 100);
-            showFlashMessage(data.message, "warningFlash");
-        }
-    })
-    .catch(error => {
-        showFlashMessage(error, "errorFlash")
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                populateImageGrid(data.data.images, nextPage ? true : false);
+            } else {
+                setTimeout(() => {
+                    if (!nextPage) document.getElementById('imageGrid').innerHTML = "";
+                }, 100);
+            }
+        })
+        .catch(error => {
+            showFlashMessage(error, "errorFlash")
+        });
+
+    setTimeout(() => {
+        placeholderLoading('nav-loading', false)
+    }, 500);
+}
+
+var pageModalities = 1;
+var currentQuery = "";
+var currentTags = "";
+async function fetchModalities(nextPage = false, query = currentQuery, tags = currentTags) {
+
+    currentTags = tags;
+    currentQuery = query;
+
+    placeholderLoading('nav-loading');
+    if (nextPage) pageModalities++;
+    else pageModalities = 1;
+
+    let fetchURL = "/api/commissions/modality/list" + "?page=" + String(pageModalities) + (tags ? "&tags=" + tags : "") + (query != "" ? "&query=" + query : "")
+
+    await fetch(fetchURL)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                populateModalityGrid(data.data.modalities, nextPage ? true : false);
+            } else {
+                setTimeout(() => {
+                    if (!nextPage) document.getElementById('modalityGrid').innerHTML = "";
+                }, 100);
+            }
+        })
+        .catch(error => {
+            showFlashMessage(error, "errorFlash")
+        });
 
     setTimeout(() => {
         placeholderLoading('nav-loading', false)
