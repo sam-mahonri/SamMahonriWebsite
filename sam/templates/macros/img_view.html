@@ -16,7 +16,9 @@ updated_at=None) %}
         include 'components/loading_spinner.html' %}</div>
     <img src="{{ image_link }}" id="{{ id }}" class="hideElement {{ 'hideElement' if image_link == '' else ''}}"
         onload="document.getElementById('{{ id }}_loader').classList.add('hideElement'); this.classList.remove('hideElement')">
-    {% if created_at %}
+    
+        <!-- 
+        {% if created_at %}
     <p>
         <i class="fa-solid fa-calendar-days"></i>
         {{ format_relative_time(created_at) }}
@@ -27,7 +29,9 @@ updated_at=None) %}
 
         {% endif %}
     </p>
+    
     {% endif %}
+    -->
 </div>
 {% endmacro %}
 
