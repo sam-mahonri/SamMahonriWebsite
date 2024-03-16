@@ -1070,3 +1070,7 @@ footer {
 }.postContainer *{
     text-align: center;
 }
+
+.neutralTag{
+    background-color: var(--theme-color-trans);
+}

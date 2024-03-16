@@ -385,10 +385,15 @@ function populateModalityGrid(modalities, update = false) {
 
         const descrSection = document.createElement('div');
         descrSection.className = "paddingMedium flex columnFlex gapSmall wp100 alignCenter justifyCenter"
+        
+        const upTo = document.createElement('span');
+        upTo.className = "tag neutralTag"
+        upTo.innerHTML = LC.UPTO
 
         container.appendChild(imageElement);
         descrSection.appendChild(title);
         descrSection.appendChild(description);
+        descrSection.appendChild(upTo);
         descrSection.appendChild(price);
         
         if (SYMBOLIC_LOGGED){
