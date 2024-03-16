@@ -49,11 +49,11 @@ def inject_in_template():
 
 app.jinja_env.globals.update(format_relative_time=aproximate.format_relative_time)
 
-#@app.errorhandler(Exception)
-#def handle_error(error):
-#    print(error)
-#    status_code = getattr(error, 'code', 500)
-#    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
+@app.errorhandler(Exception)
+def handle_error(error):
+    print(error)
+    status_code = getattr(error, 'code', 500)
+    return render_template('layouts/errorpage.html', error=error, status_code=status_code), status_code
 
 @jwt.expired_token_loader
 def expired_token_callback(expired_token, callback):
