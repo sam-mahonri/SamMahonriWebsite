@@ -153,8 +153,8 @@ form h2{
     .noCollapsed{
         max-height: 100% !important;
         height: 100% !important;
-        background-color: var(--sec-dark) !important;
-        backdrop-filter: blur(4px) !important;
+        background-color: var(--current-back-color) !important;
+        backdrop-filter: blur(0px);
         overflow: auto;
     }
 }

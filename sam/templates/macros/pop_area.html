@@ -1,5 +1,5 @@
-{% macro render_popup(id="pop-container", type="all") %}
-<div id="{{ id }}" class="popDialog {{'blurBack' if type == 'all' else ''}} opacity0 hideElement">
+{% macro render_popup(id="pop-container") %}
+<div id="{{ id }}" class="popDialog opacity0 hideElement">
     <span class="spc32"></span>
     <button class="selectorButton" onclick="elementVisible('{{ id }}', false, true); popCallback();"><i class="fa-regular fa-circle-xmark"></i></button>
     <section id="{{ id + '-content' }}" class="flex alignCenter justifyCenter wp100 flexExpand columnFlex"> </section>
