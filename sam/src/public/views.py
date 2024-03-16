@@ -38,4 +38,5 @@ def get_image(img):
 @public_bp.app_context_processor
 def inject_blueprint_variables():
     global_settings = GeneralSettings.find()
+    if not global_settings: global_settings = {}
     return dict(global_settings=global_settings)
