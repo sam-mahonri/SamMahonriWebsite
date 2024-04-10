@@ -1,3 +1,1 @@
-# Nenhum teste implementado ainda :/
-
-# Inserir usuário padrão
+# Nenhum teste implementado ainda
